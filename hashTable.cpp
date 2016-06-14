@@ -27,7 +27,7 @@ bool hashTable::contains( const int x )
 {
 	bool found = false;
 	for( int i = 0; !found && i < hashT.size(); ++i ) {
-		found = hashT[i].contains( x ); 
+		found = hashT[i].contains( x );
 	}
 	return found;
 }
@@ -36,4 +36,3 @@ hashTable hashTable::getHashTable() const
 {
 	return hashT;
 }
-

@@ -37,8 +37,11 @@ class Tools {
         void DFS(const vector< vector<int> > &T, word &w, const int &minDepth, const int &maxDepth);
 
         void construirHash(const vector< vector<int> > &T, const int &maxDepth);
+
         void lectura(input& x);
+
         void generarD(string name, int n, int min, int max, int porcentaje);
+        
         void generarT(string name, int n);
 
 
