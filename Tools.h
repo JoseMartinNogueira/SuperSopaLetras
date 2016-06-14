@@ -3,13 +3,24 @@
 #include <stack>
 #include <string>
 #include <iostream>
+#include <time.h>
+#include <stdlib.h>
+#include <fstream>
 using namespace std;
+
+typedef vector< vector<int> > matrix;
 
 struct word {
     int x;
     int y;
     int depth;
     int value;
+};
+
+struct input {
+    matrix T;
+    vector<int> D;
+    int min, max, porcentaje;
 };
 
 class Tools {
@@ -26,6 +37,8 @@ class Tools {
         void DFS(const vector< vector<int> > &T, word &w, const int &minDepth, const int &maxDepth);
 
         void construirHash(const vector< vector<int> > &T, const int &maxDepth);
+        void lectura(input& x);
+        void generar(string name, int n, int min, int max, int porcentaje);
 
 
 

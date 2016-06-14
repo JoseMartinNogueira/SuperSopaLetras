@@ -8,26 +8,14 @@
 #include <locale>
 #include <sstream>
 #include <list> 
+#include "Tools.cpp"
 
 using namespace std;
-
+/*
 #define numAlg 2;
 typedef vecotr< vector<int> > matrix;
 
 vector< List<int> > hashTable;
-
-
-void readFile( const int i ) const
-{
-	//i ==> algoritmo
-	//aqui llamaremos a las funciones que leen los ficheros de cada algoritmo
-	switch( i ) {
-		case 1:
-			break;
-		default:
-			break;
-	}	
-}
 
 void executeAlgorithm( const int i ) const
 {
@@ -38,38 +26,29 @@ void executeAlgorithm( const int i ) const
 			break;
 	}
 }
-
+*/
 
 int main() {
 	
-	cout << "Introducir juego de pruebas con el diccionario(con extension .txt): ";
-	string fileName;
-	cin >> fileName;
-	cout << endl;
-	ifstream dicc( fileName.c_str() );
-	cout << "Introducir juego de pruebas con la sopa de letras(con extension .txt): ";
-	cin >> fileName;
-	cout << endl;
-	ifstream sl( fileName.c_str() );
+	input x;
+	Tools tot;
+	tot.generar("holis2", 10, 2, 4, 100);
 
-	vector<int> diccionario;
-	matrix sopaLetras;
 
-	if( dicc and sl ) {
-		string lineD, lineSL;
-		while ( getline( dicc, lineD ) and getline( sl, lineSL ) ) {
-			//rellenar diccionario y sopaLetras.
-		}
+	tot.lectura(x);
+	cout << x.min << ' ' << x.max << ' ' << x.porcentaje << endl;
+	for (int i = 0; i < x.D.size(); ++i) {
+		cout << ' ' << x.D[i];
 	}
-	dicc.close();
-	sl.close();
+	cout << endl;
 
+/*
 	cout << "¿Algoritmo individual? (Si/No)";
 	string aux;
 	cin >> aux;
 	if( aux == "Si" ) {
 		cout << "Escoje uno de los siguientes (solo hace falta el número):";
-		/* Todos los algorimtos numerados*/
+		//Todos los algoritmos numerados
 		cout << endl;
 		int i;
 		cin >> i;
@@ -80,6 +59,6 @@ int main() {
 			executeAlgorithm(i);
 		}
 	}
-	cout << endl;
+	cout << endl;*/
 
 }
