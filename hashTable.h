@@ -11,8 +11,8 @@ class hashTable {
 
 	public:
 		
-		void createHashTable( const vector<int>& diccionario );
-		void createHashTable( const  matrix& sopaLetras );
+		void createHashTable( const vector<int>& diccionario, const int i );
+		void createHashTable( const  matrix& sopaLetras, const int i );
 
 		bool insert( const int x );
 		bool contains( const int x );
