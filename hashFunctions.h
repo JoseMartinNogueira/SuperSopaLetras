@@ -10,5 +10,8 @@ class hashFunctions {
 
 	private:
 		int numHashFunctions = 1;
+		int djb2( const int i ) const;
 		int modulHF( const int i, const int hashSize ) const;
+		int sdbm( const int i ) const;
+		int Jenkins ( const int a, const int b, const int i ) const;
 }
