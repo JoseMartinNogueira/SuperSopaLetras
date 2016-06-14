@@ -2,12 +2,26 @@
 
 using namespace std;
 
-int hashFunction( const int i )
+int hashFunctions::hashFunction( const int i, const int numHashFunction, const int sizeHash ) const
 {
-
+	switch( numHashFunction ) {
+		case 1:
+			//mod
+			return modulHF( i, sizeHash );
+			break;
+		case 2:
+			break;
+		default:
+			break;
+	}
 }
 
-int getNumHashFunctions() const
+int hashFunctions::getNumHashFunctions() const
 {
-	return numHashFUnctions;
+	return numHashFunctions;
+}
+
+int hashFunctions::modulHF( const int i, const int hashSize ) const
+{
+	return i%hashSize;
 }
