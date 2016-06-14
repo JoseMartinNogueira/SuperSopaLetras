@@ -67,14 +67,12 @@ void Tools::generarD(string name, int n, int min, int max, int porcentaje){
     int vals[4] = {n, min, max, porcentaje};
     jp.write(reinterpret_cast<const char *>(&vals), sizeof(vals));
     int vSt[n];
-    for (int i=0; i < n; ++i) {
-        int aux = rand()%max;
-        while (aux < min) aux = rand()%max;
-        vSt[i] = aux;
-    }
+    for (int i=0; i < n; ++i) vSt[i] = min + rand()%(max - min + 1);
     jp.write(reinterpret_cast<const char *>(&vSt), sizeof(vSt));
     jp.close();
 }
+
+
 
 void Tools::generarT(string name, int n){
     ofstream jp(name, ios::binary);
@@ -99,6 +97,7 @@ void Tools::leerDiccionario(const string &name, input& atributos) {
 
         atributos.min = vals[1];
         atributos.max = vals[2];
+        atributos.porcentaje = vals[3];
 
         dicc.read(reinterpret_cast<char *>(&D), sizeof(D));
 
