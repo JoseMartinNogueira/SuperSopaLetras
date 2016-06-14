@@ -7,8 +7,6 @@ Tools::Tools() {
      J = new int[8] {-1,  0,  1, -1, 1, -1, 0, 1};
 }
 
-
-
 void Tools::BFS(const vector< vector<int> > &T, word &w, const int &minDepth, const int &maxDepth) {
     int  N = T.size();
     queue<word> Q;
@@ -63,7 +61,7 @@ void Tools::construirHash(const vector< vector<int> > &T, const int &maxDepth) {
 }
 
 //Repasar que no haya repetidos en el diccionario.
-void Tools::generar(string name, int n, int min, int max, int porcentaje){
+void Tools::generarD(string name, int n, int min, int max, int porcentaje){
     srand(time(NULL));
     ofstream jp(name, ios::binary);
     int vals[4] = {n, min, max, porcentaje};
@@ -78,17 +76,23 @@ void Tools::generar(string name, int n, int min, int max, int porcentaje){
     jp.close();
 }
 
+void Tools::generarT(string name, int n){
+    ofstream jp(name, ios::binary);
+    jp.write(reinterpret_cast<const char *>(&n), sizeof(int));
+    int vSt[n*n];
+    for (int i = 0; i < n*n; ++i) {
+        vSt[i] = rand()%10;
+    }
+    jp.write(reinterpret_cast<const char *>(&vSt), sizeof(vSt));
+    jp.close();
+}
+
 void Tools::lectura(input& atributos) {
     cout << "Introducir nombre del juego de pruebas con el diccionario ";
     string fileName;
     cin >> fileName;
     cout << endl;
     ifstream dicc( fileName, ios::in | ios::binary);
-    //cout << "Introducir juego de pruebas con la sopa de letras(con extension .txt): ";
-    //cin >> fileName;
-   // cout << endl;
-   // ifstream sl( fileName.c_str() ios::in | ios::binary);
-
 
     if(dicc) {
         //{n, min, max, porcentaje};
@@ -96,7 +100,6 @@ void Tools::lectura(input& atributos) {
         dicc.read(reinterpret_cast<char *>(&vals), sizeof(vals));
 
         int D[vals[0]];
-        cout << "My value is " << vals[0] << endl;
         atributos.D = vector<int>(vals[0]);
 
         atributos.min = vals[1];
@@ -107,11 +110,25 @@ void Tools::lectura(input& atributos) {
         for (int i = 0; i < vals[0]; ++i) atributos.D[i] = D[i];
     }
     dicc.close();
-    /*if (sl){
-
-    }*/
-    
-    //sl.close();
+    cout << "Introducir juego de pruebas con la sopa de letras ";
+    cin >> fileName;
+    cout << endl;
+    ifstream sl(fileName, ios::in | ios::binary);
+    if (sl){
+        int n;
+        sl.read(reinterpret_cast<char *>(&n), sizeof(int));
+        atributos.T = vector< vector<int> >(n);
+        cout << n << endl;
+        for (int i = 0; i < n; ++i){
+            int fila[n];
+            sl.read(reinterpret_cast<char *>(&fila), sizeof(fila));
+            atributos.T[i] = vector<int>(n);
+            for (int j = 0; j < n; ++j) {
+                atributos.T[i][j] = fila[j];
+            }
+        }
+    }
+    sl.close();
 }
 
 

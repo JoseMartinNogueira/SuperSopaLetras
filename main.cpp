@@ -32,7 +32,8 @@ int main() {
 	
 	input x;
 	Tools tot;
-	tot.generar("holis2", 10, 2, 4, 100);
+	tot.generarD("holis2", 10, 2, 4, 100);
+	tot.generarT("tablero",2);
 
 
 	tot.lectura(x);
@@ -41,6 +42,15 @@ int main() {
 		cout << ' ' << x.D[i];
 	}
 	cout << endl;
+	cout << "-----------------------------------------------" << endl;
+	cout << "-----------------------------------------------" << endl;
+
+	for (int i = 0; i < x.T.size(); ++i) {
+		for (int j = 0; j < x.T.size(); ++j){
+			cout << ' ' << x.T[i][j];
+		}
+		cout << endl;
+	}
 
 /*
 	cout << "¿Algoritmo individual? (Si/No)";

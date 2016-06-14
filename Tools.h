@@ -38,7 +38,8 @@ class Tools {
 
         void construirHash(const vector< vector<int> > &T, const int &maxDepth);
         void lectura(input& x);
-        void generar(string name, int n, int min, int max, int porcentaje);
+        void generarD(string name, int n, int min, int max, int porcentaje);
+        void generarT(string name, int n);
 
 
 
