@@ -7,7 +7,7 @@
 #include <iomanip>
 #include <locale>
 #include <sstream>
-#include <list> 
+#include <list>
 #include "Tools.cpp"
 
 using namespace std;
@@ -29,7 +29,7 @@ void executeAlgorithm( const int i ) const
 */
 
 int main() {
-	
+
 	input x;
 	Tools tot;
 	tot.generarD("holis2", 10, 2, 4, 100);

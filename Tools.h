@@ -40,8 +40,12 @@ class Tools {
 
         void lectura(input& x);
 
+        void leerDiccionario(const string &name, input &x);
+
+        void leerTablero(const string &name, input &x);
+
         void generarD(string name, int n, int min, int max, int porcentaje);
-        
+
         void generarT(string name, int n);
 
 

@@ -87,13 +87,8 @@ void Tools::generarT(string name, int n){
     jp.close();
 }
 
-void Tools::lectura(input& atributos) {
-    cout << "Introducir nombre del juego de pruebas con el diccionario ";
-    string fileName;
-    cin >> fileName;
-    cout << endl;
-    ifstream dicc( fileName, ios::in | ios::binary);
-
+void Tools::leerDiccionario(const string &name, input& atributos) {
+    ifstream dicc( name, ios::in | ios::binary);
     if(dicc) {
         //{n, min, max, porcentaje};
         int vals[4];
@@ -106,14 +101,14 @@ void Tools::lectura(input& atributos) {
         atributos.max = vals[2];
 
         dicc.read(reinterpret_cast<char *>(&D), sizeof(D));
-         
+
         for (int i = 0; i < vals[0]; ++i) atributos.D[i] = D[i];
     }
     dicc.close();
-    cout << "Introducir juego de pruebas con la sopa de letras ";
-    cin >> fileName;
-    cout << endl;
-    ifstream sl(fileName, ios::in | ios::binary);
+}
+
+void Tools::leerTablero(const string &name, input& atributos) {
+    ifstream sl(name, ios::in | ios::binary);
     if (sl){
         int n;
         sl.read(reinterpret_cast<char *>(&n), sizeof(int));
@@ -131,5 +126,17 @@ void Tools::lectura(input& atributos) {
     sl.close();
 }
 
+void Tools::lectura(input& atributos) {
+    cout << "Introducir nombre del juego de pruebas con el diccionario ";
+    string fileName;
+    cin >> fileName;
+    cout << endl;
 
+    leerDiccionario(fileName, atributos);
 
+    cout << "Introducir juego de pruebas con la sopa de letras ";
+    cin >> fileName;
+    cout << endl;
+
+    leerTablero(fileName, atributos);
+}
