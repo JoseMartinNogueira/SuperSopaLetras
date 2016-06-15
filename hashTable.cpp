@@ -23,13 +23,23 @@ void hashTable::createHashTable( const  matrix& sopaLetras, const int numHashFun
 	/*Pendiente de las funciones de hash*/
 }
 
+void hashTable::insert( const int i, const int value ) 
+{
+	hashT[i].push_back(value);
+}
+
 bool hashTable::contains( const int x )
 {
 	bool found = false;
-	for( int i = 0; !found && i < hashT.size(); ++i ) {
+	for ( int i = 0; !found && i < hashT.size(); ++i ) {
 		found = hashT[i].contains( x );
 	}
 	return found;
+}
+
+bool hashTable::empty( const int i ) 
+{
+	return ( hashT[i].size() == 0 );
 }
 
 hashTable hashTable::getHashTable() const

@@ -14,4 +14,8 @@ class hashFunctions {
 		int modulHF( const int i, const int hashSize ) const;
 		int sdbm( const int i ) const;
 		int Jenkins ( const int i ) const;
+		int linearProbing ( const int posicion, const int i ) const;
+		int hashFunctions::knuth ( const int ) const;
+		void hashFunctions::cuckooHashing ( const int i ) const
+
 }
