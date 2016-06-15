@@ -1,13 +1,10 @@
 #include "hashFunction"
-
-
 using namespace std;
 
 int hashFunctions::hashFunction( const int i, const int numHashFunction, const int sizeHash ) const
 {
 	switch( numHashFunction ) {
 		case 1:
-			//mod
 			return modulHF( i, sizeHash );
 			break;
 		case 2:
@@ -20,11 +17,13 @@ int hashFunctions::hashFunction( const int i, const int numHashFunction, const i
 			return Jenkins( i );
 			break;
 		case 5:
-			int posicion = modulHF(i,sizeHash);
+			int posicion = modulHF( i, sizeHash );
 			return linearProbing ( posicion, i );
 			break;
 		case 6:
 			return knuth( i );
+		case 7:
+			return cuckooHashing ( i, sizeHash );
 		default:
 			break;
 	}
@@ -84,7 +83,37 @@ int hashFunctions::knuth ( const int ) const
 	return i*2654435761%(2<<32);
 }
 
-int hashFunctions::cuckooHashing ( const int i ) const
+int hashFunctions::cuckooF1 ( const int, const int sizeHash ) const
 {
 
+}
+
+int hashFunctions::cuckooF2 ( const int, const int sizeHash ) const
+{
+
+}
+
+void hashFunctions::cuckooHashing ( const int i, const int sizeHash ) const
+{
+
+	hashTable ht1 = getHashTable();
+	hashTable ht2 = getHashTable();
+
+	vector<int> A1; //Accesos hechos a H1, en este vector guardaremos la posición
+	vector<int> A2; //Accesos hechos a H2, en este vector guardaremos la posición
+
+	while () {
+		int posH1 = cuckooF1 ( i, sizeHash );
+		//Si está vacío, perfecto. Insertamos y ya está
+		if ( ht1.empty(posH1) ) ht1.insert(i);
+		//Calcular el valor de la posición de H1 que quitamos en H2
+		int posH2 = cuckooF2 ( ht1.value(posH1), sizeHash );
+
+		else {
+			//Insertamos el valor de la HT1 en la HT2 y la HT2 está desocupada
+			if ( ht2.empty(posH2) ) ht2.insert(i);
+			//Insertamos el valor de la HT1 en la HT2 pero la HT2 está ocupada
+			else posH1 = cuckooF1 ( ht2.value(posH2), sizeHash );
+		}
+	}
 }

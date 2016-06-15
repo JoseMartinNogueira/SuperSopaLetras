@@ -16,6 +16,6 @@ class hashFunctions {
 		int Jenkins ( const int i ) const;
 		int linearProbing ( const int posicion, const int i ) const;
 		int hashFunctions::knuth ( const int ) const;
-		int hashFunctions::cuckooHashing ( const int i ) const
+		void hashFunctions::cuckooHashing ( const int i ) const
 
 }

@@ -13,9 +13,10 @@ class hashTable {
 		
 		void createHashTable( const vector<int>& diccionario, const int i );
 		void createHashTable( const  matrix& sopaLetras, const int i );
-
-		bool insert( const int x );
+		void insert( const int i, const int value );
+		
 		bool contains( const int x );
+		bool empty( const int i ) 
 		hashTable getHashTable() const;
 
 	private:
