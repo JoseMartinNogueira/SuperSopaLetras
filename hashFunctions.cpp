@@ -102,18 +102,31 @@ void hashFunctions::cuckooHashing ( const int i, const int sizeHash ) const
 	vector<int> A1; //Accesos hechos a H1, en este vector guardaremos la posición
 	vector<int> A2; //Accesos hechos a H2, en este vector guardaremos la posición
 
-	while () {
+	bool finished = false;
+	bool cycle = false;
+
+	while (not cycle || not finished) {
 		int posH1 = cuckooF1 ( i, sizeHash );
 		//Si está vacío, perfecto. Insertamos y ya está
-		if ( ht1.empty(posH1) ) ht1.insert(i);
-		//Calcular el valor de la posición de H1 que quitamos en H2
-		int posH2 = cuckooF2 ( ht1.value(posH1), sizeHash );
-
+		if ( ht1.empty(posH1) ) {
+			ht1.insert(i);
+			finished = true;
+		}
+		
 		else {
+			//Calcular el valor de la posición de H1 que quitamos en H2
+			int posH2 = cuckooF2 ( ht1.value(posH1), sizeHash );
+			checkIfCycle(A2);
 			//Insertamos el valor de la HT1 en la HT2 y la HT2 está desocupada
-			if ( ht2.empty(posH2) ) ht2.insert(i);
+			if ( ht2.empty(posH2) ) {
+				ht2.insert(i);
+				finished = true;
+			}
 			//Insertamos el valor de la HT1 en la HT2 pero la HT2 está ocupada
-			else posH1 = cuckooF1 ( ht2.value(posH2), sizeHash );
+			else {
+				posH1 = cuckooF1 ( ht2.value(posH2), sizeHash );
+				checkIfCycle(A1);
+			}
 		}
 	}
 }
