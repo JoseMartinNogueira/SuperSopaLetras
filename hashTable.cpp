@@ -3,8 +3,12 @@
 
 using namespace std;
 
-typedef vector< list<int> > hashTable;
+typedef vector< list<int> > hashTab;
 typedef vector< vector<int> > matrix;
+
+void hashTable(){
+	hashT = NULL;
+}
 
 void hashTable::createHashTable( const vector<int>& diccionario, const int numHashFunction )
 {
@@ -42,7 +46,7 @@ bool hashTable::empty( const int i )
 	return ( hashT[i].size() == 0 );
 }
 
-hashTable hashTable::getHashTable() const
+hashTab hashTable::getHashTable() const
 {
 	return hashT;
 }
