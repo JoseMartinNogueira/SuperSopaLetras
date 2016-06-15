@@ -12,7 +12,7 @@ void hashTable::createHashTable( const vector<int>& diccionario, const int numHa
 	hashTable hash (size);
 
 	for( auto a : diccionario ) {
-		hash[hashFunction( a, numHashFunction, size )].insert(a);
+		hash[hashFunction( a, numHashFunction, size )].append(a);
 	}
 
 	hashT = hash;
