@@ -51,7 +51,7 @@ void Tools::DFS(const vector< vector<int> > &T, word &w, const int &minDepth, co
     }
 }
 
-void Tools::construirHash(const vector< vector<int> > &T, const int &maxDepth) {
+void Tools::construirHash(const vector< vector<int> > &T, const int &minDepth, const int &maxDepth ) {
     for (int i = 0; i < 10; ++i) {
         for (int j = 0; j < 10; ++j) {
             word w = {i, j, 0, T[i][j]};
@@ -161,19 +161,4 @@ void Tools::leerTablero(const string &name, input& atributos) {
         }
     }
     sl.close();
-}
-
-void Tools::lectura(input& atributos) {
-    cout << "Introducir nombre del juego de pruebas con el diccionario ";
-    string fileName;
-    cin >> fileName;
-    cout << endl;
-
-    leerDiccionario(fileName, atributos);
-
-    cout << "Introducir juego de pruebas con la sopa de letras ";
-    cin >> fileName;
-    cout << endl;
-
-    leerTablero(fileName, atributos);
 }
