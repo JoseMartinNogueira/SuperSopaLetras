@@ -32,6 +32,11 @@ bool hashTable::contains( const int x )
 	return found;
 }
 
+bool hashTable::empty( const int i ) 
+{
+	return (hashT[i].size() == 0);
+}
+
 hashTable hashTable::getHashTable() const
 {
 	return hashT;
