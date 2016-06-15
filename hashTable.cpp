@@ -42,6 +42,7 @@ bool hashTable::empty( const int i )
 	return ( hashT[i].size() == 0 );
 }
 
+
 Table hashTable::getHashTable() const
 {
 	return hashT;
