@@ -16,6 +16,12 @@ int main(int argc, char *argv[]) {
         Tools T;
         T.generarD(argv[1], atoi(argv[2]), atoi(argv[3]), atoi(argv[4]), 0);
     }
+    else if (argc == 7) {
+        Tools T;
+        input in;
+        T.leerTablero(argv[5], in);
+        T.generarDT(argv[1], atoi(argv[2]), atoi(argv[3]), atoi(argv[4]), 20, in.T);
+    }
     else {
         cout << endl;
         cout << "!!! MAL USO !!!" << endl;

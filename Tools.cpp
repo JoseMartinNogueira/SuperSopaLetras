@@ -60,6 +60,11 @@ void Tools::construirHash(const vector< vector<int> > &T, const int &maxDepth) {
     }
 }
 
+int Tools::numDigits(int x) {
+    int l = 1;
+    while (x /= 10) ++l;
+    return l;
+}
 //Repasar que no haya repetidos en el diccionario.
 void Tools::generarD(string name, int n, int min, int max, int porcentaje){
     srand(time(NULL));
@@ -68,6 +73,40 @@ void Tools::generarD(string name, int n, int min, int max, int porcentaje){
     jp.write(reinterpret_cast<const char *>(&vals), sizeof(vals));
     int vSt[n];
     for (int i=0; i < n; ++i) vSt[i] = min + rand()%(max - min + 1);
+    jp.write(reinterpret_cast<const char *>(&vSt), sizeof(vSt));
+    jp.close();
+}
+
+void Tools::generarDT(string name, int n, int min, int max, int porcentaje, matrix &T){
+    ofstream jp(name, ios::binary);
+    int vals[4] = {n, min, max, porcentaje};
+    jp.write(reinterpret_cast<const char *>(&vals), sizeof(vals));
+    int vSt[n];
+    int lmin = numDigits(min);
+    int lmax = numDigits(max);
+    int it = (n*porcentaje)/100;
+    cout << it << endl;
+    for (int i = 0; i <= ((n*porcentaje)/100); ++i) {
+        int r = lmin + rand()%(lmax - lmin + 1);
+        int x = rand()%n;
+        int y = rand()%n;
+        vSt[i] = T[x][y];
+        /*for (int j = 0; j < r; ++j) {
+            int pos = rand()%8;
+            int ii = x + I[pos];
+            int jj = y + J[pos];
+            while (ii < 0 or ii >= n or jj < 0 or jj >= n) {
+                ii = x + I[pos];
+                jj = y + J[pos];
+                pos = rand()%8;
+            }
+            vSt[i] = vSt[i]*10 + T[ii][jj];
+
+        }
+        */
+
+    }
+    for (int i = ((n*porcentaje)/100) + 1; i < n; ++i) vSt[i] = min + rand()%(max - min + 1);
     jp.write(reinterpret_cast<const char *>(&vSt), sizeof(vSt));
     jp.close();
 }

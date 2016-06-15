@@ -31,6 +31,8 @@ class Tools {
 
 	public:
         Tools();
+
+        int numDigits(int x);
         /* params: Tablero, posicionPartida, tamanoMinimo, tamanoMaximo, hashFuncion */
         void BFS(const vector< vector<int> > &T, word &w, const int &minDepth, const int &maxDepth);
         /* params: Tablero, posicionPartida, tamanoMinimo tamanoMaximo */
@@ -45,6 +47,8 @@ class Tools {
         void leerTablero(const string &name, input &x);
 
         void generarD(string name, int n, int min, int max, int porcentaje);
+
+        void generarDT(string name, int n, int min, int max, int porcentaje, matrix &T);
 
         void generarT(string name, int n);
 
