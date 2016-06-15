@@ -51,7 +51,7 @@ void Tools::DFS(const vector< vector<int> > &T, word &w, const int &minDepth, co
     }
 }
 
-void Tools::construirHash(const vector< vector<int> > &T, const int &minDepth, const int &maxDepth ) {
+void Tools::construirHash(const vector< vector<int> > &T, const int &minDepth, const int &maxDepth) {
     for (int i = 0; i < 10; ++i) {
         for (int j = 0; j < 10; ++j) {
             word w = {i, j, 0, T[i][j]};

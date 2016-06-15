@@ -22,8 +22,10 @@ int hashFunctions::hashFunction( const int i, const int numHashFunction, const i
 			break;
 		case 6:
 			return knuth( i );
+			break;
 		case 7:
 			return cuckooHashing ( i, sizeHash );
+			break;
 		default:
 			break;
 	}
@@ -41,7 +43,7 @@ int hashFunctions::modulHF( const int i, const int hashSize ) const
 
 int hashFunctions::djb2( const int i ) const
 {
-    int hash = 5381; 
+    int hash = 5381;
     for (int c = i; c > 0; --c) {
     	hash = ((hash << 5) + hash) + c; /* hash * 33 + c */
     }
@@ -112,7 +114,7 @@ void hashFunctions::cuckooHashing ( const int i, const int sizeHash ) const
 			ht1.insert(i);
 			finished = true;
 		}
-		
+
 		else {
 			//Calcular el valor de la posición de H1 que quitamos en H2
 			int posH2 = cuckooF2 ( ht1.value(posH1), sizeHash );
