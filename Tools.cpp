@@ -85,13 +85,12 @@ void Tools::generarDT(string name, int n, int min, int max, int porcentaje, matr
     int lmin = numDigits(min);
     int lmax = numDigits(max);
     int it = (n*porcentaje)/100;
-    cout << it << endl;
-    for (int i = 0; i <= ((n*porcentaje)/100); ++i) {
+    for (int i = 0; i < it; ++i) {
         int r = lmin + rand()%(lmax - lmin + 1);
-        int x = rand()%n;
-        int y = rand()%n;
+        int x = rand()%T.size() - 1;
+        int y = rand()%T.size() - 1;
         vSt[i] = T[x][y];
-        /*for (int j = 0; j < r; ++j) {
+        for (int j = 0; j < r; ++j) {
             int pos = rand()%8;
             int ii = x + I[pos];
             int jj = y + J[pos];
@@ -103,10 +102,10 @@ void Tools::generarDT(string name, int n, int min, int max, int porcentaje, matr
             vSt[i] = vSt[i]*10 + T[ii][jj];
 
         }
-        */
 
     }
-    for (int i = ((n*porcentaje)/100) + 1; i < n; ++i) vSt[i] = min + rand()%(max - min + 1);
+
+    for (int i = it ; i < n; ++i) vSt[i] = min + rand()%(max - min + 1);
     jp.write(reinterpret_cast<const char *>(&vSt), sizeof(vSt));
     jp.close();
 }
