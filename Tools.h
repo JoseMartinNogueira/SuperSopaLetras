@@ -38,9 +38,7 @@ class Tools {
         /* params: Tablero, posicionPartida, tamanoMinimo tamanoMaximo */
         void DFS(const vector< vector<int> > &T, word &w, const int &minDepth, const int &maxDepth);
 
-        void construirHash(const vector< vector<int> > &T, const int &maxDepth);
-
-        void lectura(input& x);
+        void construirHash(const vector< vector<int> > &T, const int &minDepth, const int &maxDepth);
 
         void leerDiccionario(const string &name, input &x);
 
