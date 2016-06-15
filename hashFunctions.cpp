@@ -22,8 +22,10 @@ int hashFunctions::hashFunction( const int i, const int numHashFunction, const i
 			break;
 		case 6:
 			return knuth( i );
+			break;
 		case 7:
 			return cuckooHashing ( i, sizeHash );
+			break;
 		default:
 			break;
 	}
