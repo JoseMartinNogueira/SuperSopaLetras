@@ -8,6 +8,7 @@
 #include <locale>
 #include <sstream>
 #include <list>
+#include "hashTable.cpp"
 #include "Tools.cpp"
 
 using namespace std;
@@ -42,9 +43,8 @@ void coutHashes() {
 int main(int argc, char *argv[]) {
 
 
-
 	/*__________________INFORMACION PROBLEMA_____________________*/
-
+/*
 	string nombreDiccionario;
 	string nombreTablero;
 
@@ -112,14 +112,17 @@ int main(int argc, char *argv[]) {
 			cin >> hash1;
 			break;
 	}
-
+*/
 	/*__________________CONSTRUCCION PROBLEMA_____________________*/
 	//lectura de Diccionario y tablero
 	Tools H;
 	input P;
-	H.leerDiccionario(nombreDiccionario, P);
-	H.leerTablero(nombreTablero,P);
+	//H.leerDiccionario(nombreDiccionario, P);
+	//H.leerTablero(nombreTablero,P);
 	//Construccion de la estructura de hash
+	H.leerDiccionario("ddd", P);
+	hashTable HT;
+	//HT.createHashTable(P.D, 1);
 
 
 }
