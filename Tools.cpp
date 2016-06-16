@@ -152,11 +152,13 @@ class Tools {
             int vals[4] = {n, min, max, porcentaje};
             jp.write(reinterpret_cast<const char *>(&vals), sizeof(vals));
             int vSt[n];
-            int lmin = numDigits(min);
-            int lmax = numDigits(max);
+            int min2 = pow(10,min - 1);
+            int max2 = pow(10,max) - 1;
+            int lmin = numDigits(min2);
+            int lmax = numDigits(max2);
             int it = (n*porcentaje)/100;
             for (int i = 0; i < it; ++i) {
-                int r = lmin + rand()%(lmax - lmin + 1);
+                int r = lmin + rand()%(lmax - lmin);
                 int x = rand()%T.size() - 1;
                 int y = rand()%T.size() - 1;
                 vSt[i] = T[x][y];
@@ -170,12 +172,10 @@ class Tools {
                         pos = rand()%8;
                     }
                     vSt[i] = vSt[i]*10 + T[ii][jj];
-
                 }
-
             }
 
-            for (int i = it ; i < n; ++i) vSt[i] = min + rand()%(max - min + 1);
+            for (int i = it ; i < n; ++i) vSt[i] = min2 + rand()%(max2 - min2 + 1);
             jp.write(reinterpret_cast<const char *>(&vSt), sizeof(vSt));
             jp.close();
         }
@@ -220,7 +220,7 @@ class Tools {
                 int n;
                 sl.read(reinterpret_cast<char *>(&n), sizeof(int));
                 atributos.T = vector< vector<int> >(n);
-                cout << n << endl;
+                //cout << n << endl;
                 for (int i = 0; i < n; ++i){
                     int fila[n];
                     sl.read(reinterpret_cast<char *>(&fila), sizeof(fila));
