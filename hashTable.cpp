@@ -1,52 +1,66 @@
-#include "hashTable.h"
+#include <iostream>
+#include <list>
+#include <vector>
+#include "hashFunctions.h"
+using namespace std;
 
-void hashTable::createHashTable(vector<int>& diccionario, int numHashFunction )
-{
+typedef vector< list<int> > Table;
+typedef vector< vector<int> > matrix;
 
-	int size = diccionario.size();
-	hashT = Table(size);
-	hashFunctions HF;
-	for( auto a : diccionario ) {
-		hashT[HF.hashFunction( a, numHashFunction, size )].push_back(a);
-	}
+class hashTable {
+	private:
+		Table hashT;
 
-}
+	public:
+		void createHashTable(vector<int>& diccionario, int numHashFunction )
+		{
 
-void hashTable::createHashTable( matrix& sopaLetras,int numHashFunction )
-{
-	int n = sopaLetras.size();
-	for (int i = 0; i < n; ++i) {
-		for (int j = 0; j < n; ++i) {
+			int size = diccionario.size();
+			hashT = Table(size);
+			hashFunctions HF;
+			for( auto a : diccionario ) {
+				hashT[HF.hashFunction( a, numHashFunction, size )].push_back(a);
+			}
 
 		}
-	}
 
-}
+		void createHashTable( matrix& sopaLetras,int numHashFunction )
+		{
+			int n = sopaLetras.size();
+			for (int i = 0; i < n; ++i) {
+				for (int j = 0; j < n; ++i) {
 
-void hashTable::insert( const int i, const int value )
-{
-	hashT[i].push_back(value);
-}
+				}
+			}
 
-bool hashTable::contains( const int x )
-{
-	for ( int i = 0; i < hashT.size(); ++i ) {
-		for( auto& a : hashT[i] ) {
-			if ( a == x ) return true;
 		}
-	}
-	return false;
-}
 
-bool hashTable::empty( const int i )
-{
-	return ( hashT[i].size() == 0 );
-}
+		void insert( const int i, const int value )
+		{
+			hashT[i].push_back(value);
+		}
+
+		bool contains( const int x, const int hf ) const
+		{
+			hashFunctions HF;
+			for( auto& a : hashT[HF.hashFunction( x, hf, hashT.size() )] ) {
+				if ( a == x ) return true;
+			}
+			return false;
+		}
+
+		bool empty( const int i )
+		{
+			return ( hashT[i].size() == 0 );
+		}
 
 
-Table hashTable::getHashTable() const
-{
-	return hashT;
-}
+		Table getHashTable() const
+		{
+			return hashT;
+		}
 
-hashTable::hashTable() {}
+		hashTable() {}
+
+
+};

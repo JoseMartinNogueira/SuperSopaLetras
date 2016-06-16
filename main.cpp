@@ -117,6 +117,7 @@ int main(int argc, char *argv[]) {
 	//lectura de Diccionario y tablero
 	Tools H;
 	input P;
+	P.contador = 0;
 	//H.leerDiccionario(nombreDiccionario, P);
 	//H.leerTablero(nombreTablero,P);
 	//Construccion de la estructura de hash
@@ -124,11 +125,16 @@ int main(int argc, char *argv[]) {
 	hashTable HT;
 
 	HT.createHashTable(P.D, 1);
-	for (auto a : HT.getHashTable()) {
-		for(auto b : a) cout << " " << b;
+
+	H.leerTablero("t", P);
+
+	cout << "---------------------------" << endl;
+	for (auto i : P.T) {
+		for(auto j : i) cout << " " << j;
 		cout << endl;
 	}
-	cout<< endl;
-	
+	cout << "---------------------------" << endl;
+
+
 
 }

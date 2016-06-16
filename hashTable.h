@@ -1,7 +1,7 @@
 #include <iostream>
 #include <list>
 #include <vector>
-#include "hashFunctions.cpp"
+#include "hashFunctions.h"
 using namespace std;
 
 typedef vector< list<int> > Table;
@@ -16,7 +16,7 @@ class hashTable {
 		void createHashTable(matrix& sopaLetras,int i );
 		void insert( const int i, const int value );
 
-		bool contains( const int x );
+		bool contains( const int x, const int hf ) const;
 		bool empty( const int i );
 		Table getHashTable() const;
 
