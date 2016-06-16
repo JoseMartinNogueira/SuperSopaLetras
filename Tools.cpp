@@ -44,12 +44,12 @@ class Tools {
             int  N = IN.T.size();
             queue<word> Q;
             Q.push(w);
-            cout << "min: " << IN.min << ", max: " << IN.max << endl;
+            //cout << " min: " << IN.min << ", max: " << IN.max << endl;
             while (not Q.empty()) {
                 word act = Q.front();
                 Q.pop();
                 ////////////////////////////
-                cout << "(" << act.x << "," << act.y << ") " << act.value;
+                //cout << "(" << act.x << "," << act.y << ") " << act.value;
 
                 if((act.depth >= IN.min) and (HT.contains(act.value, hf))) {
                     ++IN.contador;
@@ -73,7 +73,7 @@ class Tools {
             int aux;
             queue<word> Q;
             Q.push(w);
-            cout << "min: " << IN.min << ", max: " << IN.max << endl;
+            cout << " min: " << IN.min << ", max: " << IN.max << endl;
             while (not Q.empty()) {
                 word act = Q.front();
                 Q.pop();
@@ -160,8 +160,10 @@ class Tools {
                 int r = min + rand()%(max - min + 1);
                 int x = rand()%T.size();
                 int y = rand()%T.size();
+                /*
                 cout << min << " " << max << " " << r << " " << T.size() << " (";
                 cout << x << "," << y << ")" << " e: " << T[x][y];
+                */
                 vSt[i] = T[x][y];
                 for (int j = 1; j < r; ++j)  {
                     int k = rand()%8;
@@ -172,9 +174,10 @@ class Tools {
                         xx = x + I[k];
                         yy = y + J[k];
                     }
+                    x = xx; y = yy;
                     vSt[i] = vSt[i]*10 + T[xx][yy];
                 }
-                cout << " ee: " << vSt[i] << endl;
+                //cout << " ee: " << vSt[i] << endl;
                 //vSt[i] = min2 + rand()%(max2 - min2 + 1);
             }
             for (int i = it ; i < n; ++i) vSt[i] = min2 + rand()%(max2 - min2 + 1);
