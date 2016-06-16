@@ -167,7 +167,7 @@ class Tools {
         }
 
         void generarDT(string name, int n, int min, int max, int porcentaje, matrix &T){
-            //srand(time(NULL));
+            srand(time(NULL));
             ofstream jp(name, ios::binary);
             int min2 = pow(10,min - 1);
             int max2 = pow(10,max) - 1;
@@ -265,7 +265,7 @@ class Tools {
             IN.max = numDigits(IN.max);
             for (int i = 0; i < N; ++i) {
                 for (int j = 0; j < N; ++j) {
-                    word w = {i, j, 0, IN.T[i][j]};
+                    word w = {i, j, 1, IN.T[i][j]};
                     BFS(IN, w, HT, hf);
                 }
             }
@@ -281,7 +281,7 @@ class Tools {
             IN.max = numDigits(IN.max);
             for (int i = 0; i < N; ++i) {
                 for (int j = 0; j < N; ++j) {
-                    word w = {i, j, 0, IN.T[i][j]};
+                    word w = {i, j, 1, IN.T[i][j]};
                     BFS2(IN, w, HT, hf);
                 }
             }
