@@ -148,33 +148,35 @@ class Tools {
         }
 
         void generarDT(string name, int n, int min, int max, int porcentaje, matrix &T){
+            //srand(time(NULL));
             ofstream jp(name, ios::binary);
-            int vals[4] = {n, min, max, porcentaje};
-            jp.write(reinterpret_cast<const char *>(&vals), sizeof(vals));
-            int vSt[n];
             int min2 = pow(10,min - 1);
             int max2 = pow(10,max) - 1;
-            int lmin = numDigits(min2);
-            int lmax = numDigits(max2);
+            int vals[4] = {n, min2, max2, porcentaje};
+            jp.write(reinterpret_cast<const char *>(&vals), sizeof(vals));
+            int vSt[n];
             int it = (n*porcentaje)/100;
             for (int i = 0; i < it; ++i) {
-                int r = lmin + rand()%(lmax - lmin);
-                int x = rand()%T.size() - 1;
-                int y = rand()%T.size() - 1;
+                int r = min + rand()%(max - min + 1);
+                int x = rand()%T.size();
+                int y = rand()%T.size();
+                cout << min << " " << max << " " << r << " " << T.size() << " (";
+                cout << x << "," << y << ")" << " e: " << T[x][y];
                 vSt[i] = T[x][y];
-                for (int j = 0; j < r; ++j) {
-                    int pos = rand()%8;
-                    int ii = x + I[pos];
-                    int jj = y + J[pos];
-                    while (ii < 0 or ii >= n or jj < 0 or jj >= n) {
-                        ii = x + I[pos];
-                        jj = y + J[pos];
-                        pos = rand()%8;
+                for (int j = 1; j < r; ++j)  {
+                    int k = rand()%8;
+                    int xx = x + I[k];
+                    int yy = y + J[k];
+                    while (not (xx >= 0 and xx < T.size() and yy >= 0 and yy < T.size())) {
+                        k = rand()%8;
+                        xx = x + I[k];
+                        yy = y + J[k];
                     }
-                    vSt[i] = vSt[i]*10 + T[ii][jj];
+                    vSt[i] = vSt[i]*10 + T[xx][yy];
                 }
+                cout << " ee: " << vSt[i] << endl;
+                //vSt[i] = min2 + rand()%(max2 - min2 + 1);
             }
-
             for (int i = it ; i < n; ++i) vSt[i] = min2 + rand()%(max2 - min2 + 1);
             jp.write(reinterpret_cast<const char *>(&vSt), sizeof(vSt));
             jp.close();
