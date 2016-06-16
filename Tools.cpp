@@ -161,13 +161,16 @@ class Tools {
             int vals[4] = {n, min2, max2, porcentaje};
             jp.write(reinterpret_cast<const char *>(&vals), sizeof(vals));
             int vSt[n];
-            for (int i=0; i < n; ++i) vSt[i] = min2 + rand()%(max2 - min2 + 1);
+            for (int i=0; i < n; ++i) {
+                vSt[i] = min2 + rand()%(max2 - min2 + 1);
+                for (int j = 0; j < i; ++j) if(vSt[i] == vSt[j]) {--i; break;}
+            }
             jp.write(reinterpret_cast<const char *>(&vSt), sizeof(vSt));
             jp.close();
         }
 
         void generarDT(string name, int n, int min, int max, int porcentaje, matrix &T){
-            //srand(time(NULL));
+            srand(time(NULL));
             ofstream jp(name, ios::binary);
             int min2 = pow(10,min - 1);
             int max2 = pow(10,max) - 1;
@@ -198,8 +201,12 @@ class Tools {
                 }
                 //cout << " ee: " << vSt[i] << endl;
                 //vSt[i] = min2 + rand()%(max2 - min2 + 1);
+                for (int j = 0; j < i; ++j) if(vSt[i] == vSt[j]) {--i; break;}
             }
-            for (int i = it ; i < n; ++i) vSt[i] = min2 + rand()%(max2 - min2 + 1);
+            for (int i = it ; i < n; ++i) {
+                vSt[i] = min2 + rand()%(max2 - min2 + 1);
+                for (int j = 0; j < i; ++j) if(vSt[i] == vSt[j]) {--i; break;}
+            }
             jp.write(reinterpret_cast<const char *>(&vSt), sizeof(vSt));
             jp.close();
         }
@@ -265,7 +272,7 @@ class Tools {
             IN.max = numDigits(IN.max);
             for (int i = 0; i < N; ++i) {
                 for (int j = 0; j < N; ++j) {
-                    word w = {i, j, 0, IN.T[i][j]};
+                    word w = {i, j, 1, IN.T[i][j]};
                     BFS(IN, w, HT, hf);
                 }
             }
