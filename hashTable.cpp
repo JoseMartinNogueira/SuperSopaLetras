@@ -2,14 +2,14 @@
 
 void hashTable::createHashTable(vector<int>& diccionario, int numHashFunction )
 {
-	/*
+
 	int size = diccionario.size();
 	hashT = Table(size);
-
+	hashFunctions HF;
 	for( auto a : diccionario ) {
-		hashT[hashFunction( a, numHashFunction, size )].append(a);
+		hashT[HF.hashFunction( a, numHashFunction, size )].push_back(a);
 	}
-	*/
+
 }
 
 void hashTable::createHashTable( matrix& sopaLetras,int numHashFunction )
@@ -49,6 +49,4 @@ Table hashTable::getHashTable() const
 	return hashT;
 }
 
-hashTable::hashTable() {
-	hashT.begin() = NULL;
-}
+hashTable::hashTable() {}

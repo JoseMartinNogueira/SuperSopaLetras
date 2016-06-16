@@ -120,9 +120,14 @@ int main(int argc, char *argv[]) {
 	//H.leerDiccionario(nombreDiccionario, P);
 	//H.leerTablero(nombreTablero,P);
 	//Construccion de la estructura de hash
-	H.leerDiccionario("ddd", P);
+	H.leerDiccionario("d", P);
 	hashTable HT;
-	//HT.createHashTable(P.D, 1);
+	HT.createHashTable(P.D, 1);
+	for (auto a : HT.getHashTable()) {
+		for(auto b : a) cout << " " << b;
+		cout << endl;
+	}
+	cout<< endl;
 
 
 }

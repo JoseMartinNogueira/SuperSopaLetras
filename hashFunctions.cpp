@@ -1,6 +1,8 @@
 #include "hashFunction"
 using namespace std;
 
+hashFunctions::hashFunctions() {}
+
 int hashFunctions::hashFunction( const int i, const int numHashFunction, const int sizeHash ) const
 {
 	switch( numHashFunction ) {
