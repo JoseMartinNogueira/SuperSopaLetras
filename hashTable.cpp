@@ -1,6 +1,7 @@
 #include <iostream>
 #include <list>
 #include <vector>
+#include <utility>
 #include "hashFunctions.cpp"
 using namespace std;
 
@@ -61,6 +62,4 @@ class hashTable {
 		}
 
 		hashTable() {}
-
-
 };

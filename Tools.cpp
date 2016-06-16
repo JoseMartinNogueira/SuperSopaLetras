@@ -7,9 +7,9 @@
 #include <stdlib.h>
 #include <fstream>
 #include <cmath>
+#include <utility>
 
-
-#include "hashTable.cpp"
+#include "rollingHash.cpp"
 
 using namespace std;
 
@@ -63,6 +63,35 @@ class Tools {
                     if(x >= 0 and x < N and y >= 0 and y < N and act.depth +1 < IN.max ) {
                         word nw = {x, y, act.depth + 1, act.value*10 + IN.T[x][y]};
                         Q.push(nw);
+                    }
+                }
+            }
+        }
+
+        void BFS2(input &IN, word &w,const rollingHash &HT, const int &hf) {
+            int  N = IN.T.size();
+            int aux;
+            queue<word> Q;
+            Q.push(w);
+            cout << "min: " << IN.min << ", max: " << IN.max << endl;
+            while (not Q.empty()) {
+                word act = Q.front();
+                Q.pop();
+                ////////////////////////////
+                cout << "(" << act.x << "," << act.y << ") " << act.value;
+                aux = HT.containsRH(act.value, hf);
+                if((act.depth >= IN.min) and aux != 3) {
+                    if( aux == 1 ) ++IN.contador;
+                    cout << act.value << endl;
+                }
+                if( aux != 3 ) {
+                    for (int i = 0; i < 8; ++i) {
+                        int x = act.x + I[i];
+                        int y = act.y + J[i];
+                        if(x >= 0 and x < N and y >= 0 and y < N and act.depth +1 < IN.max ) {
+                            word nw = {x, y, act.depth + 1, act.value*10 + IN.T[x][y]};
+                            Q.push(nw);
+                        }
                     }
                 }
             }
@@ -217,6 +246,17 @@ class Tools {
             }
         }
 
-
+        void partidaPrimerCriterio2(input &IN, const rollingHash &HT, const int &hf) {
+            cout << "nononoo" << endl;
+            int N = IN.T.size();
+            IN.min = numDigits(IN.min);
+            IN.max = numDigits(IN.max);
+            for (int i = 0; i < N; ++i) {
+                for (int j = 0; j < N; ++j) {
+                    word w = {i, j, 0, IN.T[i][j]};
+                    BFS2(IN, w, HT, hf);
+                }
+            }
+        }
 
 };

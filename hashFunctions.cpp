@@ -2,7 +2,9 @@
 
 using namespace std;
 
-class hashFunctions {	
+
+class hashFunctions {
+
 	public:
 		hashFunctions() {}
 

@@ -120,6 +120,9 @@ int main(int argc, char *argv[]) {
 	//H.leerDiccionario(nombreDiccionario, P);
 	//H.leerTablero(nombreTablero,P);
 	//Construccion de la estructura de hash
+
+
+/*
 	H.leerDiccionario("d", P);
 	hashTable HT;
 
@@ -142,6 +145,27 @@ int main(int argc, char *argv[]) {
 	H.partidaPrimerCriterio(P, HT, 1);
 
 	cout << endl << "---------------:  "<< P.contador << endl;
+*/
+H.leerDiccionario("d", P);
+rollingHash RH;
 
+RH.createRollingHash(P.D, P.max, 1);
+
+H.leerTablero("t", P);
+
+cout << P.min << " " << P.max << " " << P.porcentaje << endl;
+cout << "---------------------------" << endl;
+for (auto i : P.D) cout << " " << i;
+cout << endl;
+cout << "---------------------------" << endl;
+for (auto i : P.T) {
+	for(auto j : i) cout << " " << j;
+	cout << endl;
+}
+cout << "---------------------------" << endl;
+
+H.partidaPrimerCriterio2(P, RH, 1);
+
+cout << endl << "---------------:  "<< P.contador << endl;
 
 }
