@@ -6,6 +6,7 @@
 #include <time.h>
 #include <stdlib.h>
 #include <fstream>
+#include <cmath>
 
 
 #include "hashTable.cpp"
@@ -43,19 +44,23 @@ class Tools {
             int  N = IN.T.size();
             queue<word> Q;
             Q.push(w);
-
+            cout << "min: " << IN.min << ", max: " << IN.max << endl;
             while (not Q.empty()) {
                 word act = Q.front();
                 Q.pop();
                 ////////////////////////////
-                if(act.depth >= IN.min) {
-                    if (HT.contains(act.value, hf)) ++IN.contador;
+                cout << "(" << act.x << "," << act.y << ") " << act.value;
+
+                if((act.depth >= IN.min) and (HT.contains(act.value, hf))) {
+                    ++IN.contador;
+                    cout << act.value << endl;
                 }
+
                 ////////////////////////////
                 for (int i = 0; i < 8; ++i) {
                     int x = act.x + I[i];
                     int y = act.y + J[i];
-                    if(x >= 0 and x < N and y >= 0 and y < N and act.depth < IN.max) {
+                    if(x >= 0 and x < N and y >= 0 and y < N and act.depth +1 < IN.max ) {
                         word nw = {x, y, act.depth + 1, act.value*10 + IN.T[x][y]};
                         Q.push(nw);
                     }
@@ -102,11 +107,13 @@ class Tools {
         //Repasar que no haya repetidos en el diccionario.
         void generarD(string name, int n, int min, int max, int porcentaje){
             srand(time(NULL));
+            int min2 = pow(10,min - 1);
+            int max2 = pow(10,max) - 1;
             ofstream jp(name, ios::binary);
-            int vals[4] = {n, min, max, porcentaje};
+            int vals[4] = {n, min2, max2, porcentaje};
             jp.write(reinterpret_cast<const char *>(&vals), sizeof(vals));
             int vSt[n];
-            for (int i=0; i < n; ++i) vSt[i] = min + rand()%(max - min + 1);
+            for (int i=0; i < n; ++i) vSt[i] = min2 + rand()%(max2 - min2 + 1);
             jp.write(reinterpret_cast<const char *>(&vSt), sizeof(vSt));
             jp.close();
         }
@@ -198,7 +205,10 @@ class Tools {
         }
 
         void partidaPrimerCriterio(input &IN, const hashTable &HT, const int &hf) {
+            cout << "nononoo" << endl;
             int N = IN.T.size();
+            IN.min = numDigits(IN.min);
+            IN.max = numDigits(IN.max);
             for (int i = 0; i < N; ++i) {
                 for (int j = 0; j < N; ++j) {
                     word w = {i, j, 0, IN.T[i][j]};

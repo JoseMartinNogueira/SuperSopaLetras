@@ -123,10 +123,15 @@ int main(int argc, char *argv[]) {
 	H.leerDiccionario("d", P);
 	hashTable HT;
 
+
 	HT.createHashTable(P.D, 1);
 
 	H.leerTablero("t", P);
 
+	cout << P.min << " " << P.max << " " << P.porcentaje << endl;
+	cout << "---------------------------" << endl;
+	for (auto i : P.D) cout << " " << i;
+	cout << endl;
 	cout << "---------------------------" << endl;
 	for (auto i : P.T) {
 		for(auto j : i) cout << " " << j;
@@ -136,7 +141,7 @@ int main(int argc, char *argv[]) {
 
 	H.partidaPrimerCriterio(P, HT, 1);
 
-	cout << P.contador << endl;
+	cout << endl << "---------------:  "<< P.contador << endl;
 
 
 }
