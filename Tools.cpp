@@ -8,6 +8,7 @@
 #include <fstream>
 #include <cmath>
 #include <utility>
+#include <ctime>
 
 #include "rollingHash.cpp"
 
@@ -33,11 +34,23 @@ class Tools {
     private:
         int *I;
         int *J;
+        double tTotal;
+        double tBusqueda;
 
 	public:
         Tools() {
              I = new int[8] {-1, -1, -1,  0, 0,  1, 1, 1};
              J = new int[8] {-1,  0,  1, -1, 1, -1, 0, 1};
+             tTotal = 0;
+             tBusqueda = 0;
+        }
+
+        double getTBusqueda() const {
+            return tBusqueda;
+        }
+
+        double getTTotal() const {
+            return tTotal;
         }
 
         void BFS(input &IN, word &w, const hashTable &HT, const int &hf) {
@@ -68,7 +81,8 @@ class Tools {
             }
         }
 
-        void BFS2(input &IN, word &w,const rollingHash &HT, const int &hf) {
+        void BFS2(input &IN, word &w, rollingHash &HT, const int &hf) {
+            clock_t startBFS = clock();
             int  N = IN.T.size();
             int aux;
             queue<word> Q;
@@ -95,6 +109,8 @@ class Tools {
                     }
                 }
             }
+            clock_t endBFS = clock();
+            tBusqueda = (endBFS - startBFS)/double(CLOCKS_PER_SEC)*1000;
         }
 
         void DFS(const vector< vector<int> > &T, word &w, const int &minDepth, const int &maxDepth) {
@@ -248,8 +264,9 @@ class Tools {
             }
         }
 
-        void partidaPrimerCriterio2(input &IN, const rollingHash &HT, const int &hf) {
+        void partidaPrimerCriterio2(input &IN, rollingHash &HT, const int &hf) {
             cout << "nononoo" << endl;
+            clock_t startPartida = clock();
             int N = IN.T.size();
             IN.min = numDigits(IN.min);
             IN.max = numDigits(IN.max);
@@ -259,6 +276,8 @@ class Tools {
                     BFS2(IN, w, HT, hf);
                 }
             }
+            clock_t endPartida = clock();
+            tTotal = (endPartida - startPartida)/double(CLOCKS_PER_SEC)*1000;
         }
 
 };

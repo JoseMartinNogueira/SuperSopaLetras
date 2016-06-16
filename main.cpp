@@ -168,4 +168,12 @@ H.partidaPrimerCriterio2(P, RH, 1);
 
 cout << endl << "---------------:  "<< P.contador << endl;
 
+cout << "comp: " << RH.getComparacionesRH() << endl;
+
+cout << "tiempo Construccion: " << RH.getTConstruccionRH() << endl;
+
+cout << "tiempo BFS: " << H.getTBusqueda() << endl;
+
+cout << "tiempo total: " << H.getTTotal() << endl;
+
 }

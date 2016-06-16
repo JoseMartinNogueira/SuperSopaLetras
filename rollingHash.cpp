@@ -14,7 +14,7 @@ class rollingHash {
 private:
     rollHash rollH;
     int comparacionesRH;
-    int tConstruccionRH;
+    double tConstruccionRH;
 public:
 
     rollingHash(){
@@ -31,6 +31,11 @@ public:
     int getComparacionesRH() const
     {
         return comparacionesRH;
+    }
+
+    double getTConstruccionRH() const
+    {
+        return tConstruccionRH;
     }
 
     void createRollingHash( const vector<int>& diccionario, const int maxSize, const int numHashFunction )
@@ -52,7 +57,7 @@ public:
             }
         }
         clock_t endC = clock();
-        tConstruccionRH = endC - startC;
+        tConstruccionRH = (endC - startC)/double(CLOCKS_PER_SEC)*1000;
     }
     /// si return 1 es palabra si return 2, es prefijo, 3 no esta en la hash
     int containsRH( const int i, const int numHashFunction )
