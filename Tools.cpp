@@ -39,7 +39,7 @@ class Tools {
              J = new int[8] {-1,  0,  1, -1, 1, -1, 0, 1};
         }
 
-        void BFS(const input &IN, word &w, const Table &HT, const int &hf) {
+        void BFS(input &IN, word &w, const hashTable &HT, const int &hf) {
             int  N = IN.T.size();
             queue<word> Q;
             Q.push(w);
@@ -56,7 +56,7 @@ class Tools {
                     int x = act.x + I[i];
                     int y = act.y + J[i];
                     if(x >= 0 and x < N and y >= 0 and y < N and act.depth < IN.max) {
-                        word nw = {x, y, act.depth + 1, act.value*10 + T[x][y]};
+                        word nw = {x, y, act.depth + 1, act.value*10 + IN.T[x][y]};
                         Q.push(nw);
                     }
                 }
@@ -84,7 +84,7 @@ class Tools {
                 }
             }
         }
-
+/*
         void construirHash(const vector< vector<int> > &T, const int &minDepth, const int &maxDepth) {
             for (int i = 0; i < 10; ++i) {
                 for (int j = 0; j < 10; ++j) {
@@ -93,7 +93,7 @@ class Tools {
                 }
             }
         }
-
+*/
         int numDigits(int x) {
             int l = 1;
             while (x /= 10) ++l;
@@ -197,11 +197,11 @@ class Tools {
             sl.close();
         }
 
-        void partidaPrimerCriterio(const input &IN, const Table &HT, const int &hf) {
+        void partidaPrimerCriterio(input &IN, const hashTable &HT, const int &hf) {
             int N = IN.T.size();
             for (int i = 0; i < N; ++i) {
                 for (int j = 0; j < N; ++j) {
-                    word w = {i, j, 0, T[i][j]};
+                    word w = {i, j, 0, IN.T[i][j]};
                     BFS(IN, w, HT, hf);
                 }
             }

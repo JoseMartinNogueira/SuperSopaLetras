@@ -8,7 +8,6 @@
 #include <locale>
 #include <sstream>
 #include <list>
-#include "hashTable.cpp"
 #include "Tools.cpp"
 
 using namespace std;
@@ -135,6 +134,9 @@ int main(int argc, char *argv[]) {
 	}
 	cout << "---------------------------" << endl;
 
+	H.partidaPrimerCriterio(P, HT, 1);
+
+	cout << P.contador << endl;
 
 
 }

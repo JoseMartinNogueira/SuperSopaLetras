@@ -1,7 +1,7 @@
 #include <iostream>
 #include <list>
 #include <vector>
-#include "hashFunctions.h"
+#include "hashFunctions.cpp"
 using namespace std;
 
 typedef vector< list<int> > Table;
