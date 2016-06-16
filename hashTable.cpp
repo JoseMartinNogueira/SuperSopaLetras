@@ -30,11 +30,12 @@ void hashTable::insert( const int i, const int value )
 
 bool hashTable::contains( const int x )
 {
-	bool found = false;
-	for ( int i = 0; !found && i < hashT.size(); ++i ) {
-		found = hashT[i].contains( x );
+	for ( int i = 0; i < hashT.size(); ++i ) {
+		for( auto& a : hashT[i] ) {
+			if ( a == x ) return true;
+		}
 	}
-	return found;
+	return false;
 }
 
 bool hashTable::empty( const int i )
@@ -49,5 +50,5 @@ Table hashTable::getHashTable() const
 }
 
 hashTable::hashTable() {
-	hashT = NULL;
+	hashT.begin() = NULL;
 }
