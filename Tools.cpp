@@ -161,7 +161,10 @@ class Tools {
             int vals[4] = {n, min2, max2, porcentaje};
             jp.write(reinterpret_cast<const char *>(&vals), sizeof(vals));
             int vSt[n];
-            for (int i=0; i < n; ++i) vSt[i] = min2 + rand()%(max2 - min2 + 1);
+            for (int i=0; i < n; ++i) {
+                vSt[i] = min2 + rand()%(max2 - min2 + 1);
+                for (int j = 0; j < i; ++j) if(vSt[i] == vSt[j]) {--i; break;}
+            }
             jp.write(reinterpret_cast<const char *>(&vSt), sizeof(vSt));
             jp.close();
         }
@@ -198,8 +201,12 @@ class Tools {
                 }
                 //cout << " ee: " << vSt[i] << endl;
                 //vSt[i] = min2 + rand()%(max2 - min2 + 1);
+                for (int j = 0; j < i; ++j) if(vSt[i] == vSt[j]) {--i; break;}
             }
-            for (int i = it ; i < n; ++i) vSt[i] = min2 + rand()%(max2 - min2 + 1);
+            for (int i = it ; i < n; ++i) {
+                vSt[i] = min2 + rand()%(max2 - min2 + 1);
+                for (int j = 0; j < i; ++j) if(vSt[i] == vSt[j]) {--i; break;}
+            }
             jp.write(reinterpret_cast<const char *>(&vSt), sizeof(vSt));
             jp.close();
         }
