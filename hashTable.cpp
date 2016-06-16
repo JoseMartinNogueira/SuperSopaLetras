@@ -11,18 +11,31 @@ typedef vector< vector<int> > matrix;
 class hashTable {
 	private:
 		Table hashT;
-
+		int comparacionesH;
+		double tConstruccionH;
 	public:
+
+		int getComparacionesH() const
+		{
+			return comparacionesH;
+		}
+
+		int getTConstruccionH() const
+		{
+			return tConstruccionH;
+		}
+
 		void createHashTable(vector<int>& diccionario, int numHashFunction )
 		{
-
+			clock_t startC = clock();
 			int size = diccionario.size();
 			hashT = Table(size);
 			hashFunctions HF;
 			for( auto a : diccionario ) {
 				hashT[HF.hashFunction( a, numHashFunction, size )].push_back(a);
 			}
-
+			clock_t endC = clock();
+			tConstruccionH = (endC - startC)/double(CLOCKS_PER_SEC)*1000;	
 		}
 
 		void createHashTable( matrix& sopaLetras,int numHashFunction )
@@ -41,10 +54,11 @@ class hashTable {
 			hashT[i].push_back(value);
 		}
 
-		bool contains( const int x, const int hf ) const
+		bool contains( const int x, const int hf )
 		{
 			hashFunctions HF;
 			for( auto& a : hashT[HF.hashFunction( x, hf, hashT.size() )] ) {
+				++comparacionesH;
 				if ( a == x ) return true;
 			}
 			return false;
@@ -61,5 +75,8 @@ class hashTable {
 			return hashT;
 		}
 
-		hashTable() {}
+		hashTable() {
+			comparacionesH = 0;
+			tConstruccionH = 0;
+		}
 };

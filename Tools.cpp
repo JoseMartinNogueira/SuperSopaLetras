@@ -53,7 +53,8 @@ class Tools {
             return tTotal;
         }
 
-        void BFS(input &IN, word &w, const hashTable &HT, const int &hf) {
+        void BFS(input &IN, word &w, hashTable &HT, const int &hf) {
+            clock_t startBFS = clock();
             int  N = IN.T.size();
             queue<word> Q;
             Q.push(w);
@@ -79,6 +80,8 @@ class Tools {
                     }
                 }
             }
+            clock_t endBFS = clock();
+            tBusqueda = (startBFS - endBFS)/double(CLOCKS_PER_SEC)*1000;
         }
 
         void BFS2(input &IN, word &w, rollingHash &HT, const int &hf) {
@@ -254,7 +257,8 @@ class Tools {
             sl.close();
         }
 
-        void partidaPrimerCriterio(input &IN, const hashTable &HT, const int &hf) {
+        void partidaPrimerCriterio(input &IN, hashTable &HT, const int &hf) {
+            clock_t startPartida = clock();
             cout << "nononoo" << endl;
             int N = IN.T.size();
             IN.min = numDigits(IN.min);
@@ -265,6 +269,8 @@ class Tools {
                     BFS(IN, w, HT, hf);
                 }
             }
+            clock_t endPartida = clock();
+            tTotal = (endPartida - startPartida)/double(CLOCKS_PER_SEC)*1000;
         }
 
         void partidaPrimerCriterio2(input &IN, rollingHash &HT, const int &hf) {
