@@ -2,6 +2,8 @@
 #include <list>
 #include <vector>
 #include <utility>
+#include <time.h>
+#include <ctime>
 
 #include "hashTable.cpp"
 
@@ -11,9 +13,14 @@ class rollingHash {
 
 private:
     rollHash rollH;
+    int comparacionesRH;
+    int tConstruccionRH;
 public:
 
-    rollingHash(){}
+    rollingHash(){
+        comparacionesRH = 0;
+        tConstruccionRH = 0;
+    }
 
 	int numDigits2(int x) {
 		int l = 1;
@@ -21,11 +28,15 @@ public:
 		return l;
 	}
 
+    int getComparacionesRH() const
+    {
+        return comparacionesRH;
+    }
+
     void createRollingHash( const vector<int>& diccionario, const int maxSize, const int numHashFunction )
     {
-        cout << "WTF  ----" << endl;
+        clock_t startC = clock();
         rollH = rollHash( diccionario.size() );
-        cout << "------------- WTF  ----" << endl;
         hashFunctions HF;
         for( auto a : diccionario ) {
             int aux = 10;
@@ -40,12 +51,15 @@ public:
                 rollH[HF.hashFunction( prefijo, numHashFunction, rollH.size() )].push_back( prefP );
             }
         }
+        clock_t endC = clock();
+        tConstruccionRH = endC - startC;
     }
     /// si return 1 es palabra si return 2, es prefijo, 3 no esta en la hash
-    int containsRH( const int i, const int numHashFunction ) const
+    int containsRH( const int i, const int numHashFunction )
     {
         hashFunctions HF;
         for( auto b : rollH[HF.hashFunction( i, numHashFunction, rollH.size() )] ) {
+            comparacionesRH++;
             if( b.second == true && b.first == i ) return 1;
 			else if( b.second == false && b.first == i ) return 2;
         }
