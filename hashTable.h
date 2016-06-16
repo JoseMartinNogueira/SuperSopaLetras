@@ -1,7 +1,7 @@
 #include <iostream>
 #include <list>
 #include <vector>
-#include "hashFunctions.h"
+#include "hashFunctions.cpp"
 using namespace std;
 
 typedef vector< list<int> > Table;
@@ -19,7 +19,7 @@ class hashTable {
 		bool contains( const int x );
 		bool empty( const int i );
 		Table getHashTable() const;
-		
+
 	private:
 		Table hashT;
 

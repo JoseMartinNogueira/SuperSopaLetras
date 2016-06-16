@@ -1,4 +1,4 @@
-#include "hashFunction"
+#include "hashFunctions.h"
 using namespace std;
 
 hashFunctions::hashFunctions() {}
@@ -18,7 +18,7 @@ int hashFunctions::hashFunction( const int i, const int numHashFunction, const i
 		case 4:
 			return Jenkins( i );
 			break;
-		case 5:
+		/*case 5:
 			int posicion = modulHF( i, sizeHash );
 			return linearProbing ( posicion, i );
 			break;
@@ -29,14 +29,10 @@ int hashFunctions::hashFunction( const int i, const int numHashFunction, const i
 			return cuckooHashing ( i, sizeHash );
 			break;
 		default:
-			break;
+			break;*/
 	}
 }
 
-int hashFunctions::getNumHashFunctions() const
-{
-	return numHashFunctions;
-}
 
 int hashFunctions::modulHF( const int i, const int hashSize ) const
 {
@@ -63,6 +59,7 @@ int hashFunctions::sdbm( const int i ) const
 
 int hashFunctions::Jenkins ( const int i ) const
 {
+	/*
    i = (i+0x7ed55d16) + (i<<12);
    i = (i^0xc761c23c) ^ (i>>19);
    i = (i+0x165667b1) + (i<<5);
@@ -70,33 +67,25 @@ int hashFunctions::Jenkins ( const int i ) const
    i = (i+0xfd7046c5) + (i<<3);
    i = (i^0xb55i4f09) ^ (i>>16);
    return a;
+   */
 }
-
+/*
 int hashFunctions::linearProbing ( const int posicion, const int i ) const
 {
 	//mientras no esté vacio y el elemento donde estamos sea distinto al que tenemos,
 	// seguiremos recorriendo. Lo que veo es que nos puede pasar que si la hash está llena,
 	// vaya constantemente dando vueltas?
-	hashTable ht = getHashTable();
+	Table ht = getHashTable();
 	while ( not ht.empty(posicion) && ht[posicion] != i ) ++posicion;
 	return posicion;
 }
-
+*/
 int hashFunctions::knuth ( const int ) const
 {
-	return i*2654435761%(2<<32);
+	//return i*2654435761%(2<<32);
 }
 
-int hashFunctions::cuckooF1 ( const int, const int sizeHash ) const
-{
-
-}
-
-int hashFunctions::cuckooF2 ( const int, const int sizeHash ) const
-{
-
-}
-
+/*
 void hashFunctions::cuckooHashing ( const int i, const int sizeHash ) const
 {
 
@@ -134,3 +123,4 @@ void hashFunctions::cuckooHashing ( const int i, const int sizeHash ) const
 		}
 	}
 }
+*/
