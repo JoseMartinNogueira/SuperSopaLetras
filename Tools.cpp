@@ -87,7 +87,7 @@ class Tools {
         void BFS2(input &IN, word &w, rollingHash &HT, const int &hf) {
             clock_t startBFS = clock();
             int  N = IN.T.size();
-            int aux;
+            bool aux;
             queue<word> Q;
             Q.push(w);
             cout << " min: " << IN.min << ", max: " << IN.max << endl;
@@ -96,12 +96,12 @@ class Tools {
                 Q.pop();
                 ////////////////////////////
                 cout << "(" << act.x << "," << act.y << ") " << act.value;
-                aux = HT.containsRH(act.value, hf);
-                if((act.depth >= IN.min) and aux != 3) {
-                    if( aux == 1 ) ++IN.contador;
+                aux = HT.containsRH(act.value, hf, 3);
+                if((act.depth >= IN.min) and aux ) {
+                    ++IN.contador;
                     cout << act.value << endl;
                 }
-                if( aux != 3 ) {
+                if( aux ) {
                     for (int i = 0; i < 8; ++i) {
                         int x = act.x + I[i];
                         int y = act.y + J[i];
@@ -281,7 +281,7 @@ class Tools {
             IN.max = numDigits(IN.max);
             for (int i = 0; i < N; ++i) {
                 for (int j = 0; j < N; ++j) {
-                    word w = {i, j, 0, IN.T[i][j]};
+                    word w = {i, j, 1, IN.T[i][j]};
                     BFS2(IN, w, HT, hf);
                 }
             }

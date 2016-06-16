@@ -176,4 +176,9 @@ cout << "tiempo BFS: " << H.getTBusqueda() << endl;
 
 cout << "tiempo total: " << H.getTTotal() << endl;
 
+for( auto a : RH.getROllingHash() )
+	for( auto b : a ) {
+		cout << " " << b.first
+	}
+	cout << endl;
 }
