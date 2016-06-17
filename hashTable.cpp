@@ -80,7 +80,7 @@ class hashTable {
 			return false;
 		}
 
-		bool empty( const int i )
+		bool empty(int i )
 		{
 			return ( hashT[i].size() == 0 );
 		}
@@ -95,4 +95,15 @@ class hashTable {
 			comparacionesH = 0;
 			tConstruccionH = 0;
 		}
+
+		int linearProbing (int posicion, const int i)
+        {
+            //mientras no esté vacio y el elemento donde estamos sea distinto al que tenemos,
+            // seguiremos recorriendo. 
+            while (hashT.empty(posicion) && not hashT.contains(i)) {
+            	++posicion;
+            	if (posicion ==  hashT.size()) hashT[posicion].push_back(i); //Añadimos al final de todo.
+            }
+            return posicion;
+        }
 };
