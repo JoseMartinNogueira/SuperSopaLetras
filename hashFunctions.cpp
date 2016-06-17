@@ -9,10 +9,10 @@ class hashFunctions {
 
 	public:
 		hashFunctions() {
-			
+
 		}
 
-		int hashFunction( int i, const int numHashFunction, const int sizeHash ) 
+		int hashFunction( int i, const int numHashFunction, const int sizeHash )
 		{
 			switch( numHashFunction ) {
 				case 1:

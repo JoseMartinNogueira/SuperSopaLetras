@@ -109,6 +109,7 @@ int main(int argc, char *argv[]) {
 		cout << "---------------------------" << endl;
 		for (auto i : P.D) cout << " " << i;
 		cout << endl;
+<<<<<<< HEAD
 		cout << "---------------------------" << endl;
 		for (auto i : P.T) {
 			for(auto j : i) cout << " " << j;
@@ -117,6 +118,12 @@ int main(int argc, char *argv[]) {
 		cout << "---------------------------" << endl;
 		H.setTime(0.1);
 		H.partidaSegundoCriterio(P, HT, numFHash);
+=======
+	}
+	cout << "---------------------------" << endl;
+	H.setTime(0.1);
+	H.partidaPrimerCriterioDFS1(P, HT, numFHash);
+>>>>>>> d2cb01d61e159a7fcb10067e9f67ca016529a16e
 
 		int contadorpal = 0;
 

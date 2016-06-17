@@ -171,27 +171,78 @@ class Tools {
             tBusqueda = (endBFS - startBFS)/double(CLOCKS_PER_SEC)*1000;
         }
 
-        void DFS(const vector< vector<int> > &T, word &w, const int &minDepth, const int &maxDepth) {
-            int  N = T.size();
+        void DFS(input &IN, word &w, hashTable &HT, const int &hf) {
+            clock_t startBFS = clock();
+            int  N = IN.T.size();
             stack<word> Q;
             Q.push(w);
-
-            while (not Q.empty()) {
+            double timeO = (clock()-start)/(double)(CLOCKS_PER_SEC)*1000;
+            //cout << " min: " << IN.min << ", max: " << IN.max << endl;
+            while (not Q.empty() && tOut > timeO ) {
                 word act = Q.top();
                 Q.pop();
                 ////////////////////////////
-                if(act.depth >= minDepth) cout << act.value << endl;
+                //cout << "(" << act.x << "," << act.y << ") " << act.value;
+
+                if((act.depth >= IN.min) and (HT.contains(act.value, hf))) {
+                    ++IN.contador;
+                    cout << act.value << endl;
+                    HT.deleteH(act.value, hf);
+                }
+
                 ////////////////////////////
                 for (int i = 0; i < 8; ++i) {
                     int x = act.x + I[i];
                     int y = act.y + J[i];
-                    if(x >= 0 and x < N and y >= 0 and y < N and act.depth < maxDepth) {
-                        word nw = {x, y, act.depth + 1, act.value*10 + T[x][y]};
+                    if(x >= 0 and x < N and y >= 0 and y < N and act.depth +1 <= IN.max ) {
+                        word nw = {x, y, act.depth + 1, act.value*10 + IN.T[x][y]};
                         Q.push(nw);
                     }
                 }
+                timeO = (clock()-start)/(double)(CLOCKS_PER_SEC)*1000;
             }
+            clock_t endBFS = clock();
+            tBusqueda = (endBFS - startBFS)/double(CLOCKS_PER_SEC)*1000;
         }
+
+        void DFS2(input &IN, word &w, rollingHash &RH, hashTable &HT, const int &hf) {
+            clock_t startBFS = clock();
+            int  N = IN.T.size();
+            bool aux;
+            stack<word> Q;
+            Q.push(w);
+
+            double timeO = (clock()-start)/(double)(CLOCKS_PER_SEC)*1000;
+
+            while (not Q.empty() && tOut > timeO ) {
+                word act = Q.top();
+                Q.pop();
+                ////////////////////////////
+                aux = HT.contains( act.value, hf );
+                if((act.depth >= IN.min) and aux ) {
+                    cout << "BORRO"<< endl;
+                    RH.deletePrefix( act.value, hf );
+                    HT.deleteH( act.value, hf );
+                    ++IN.contador;
+                    cout << act.value << endl;
+                }
+                if( RH.containsRH( act.value, hf, 1 ) ) {
+                    for (int i = 0; i < 8; ++i) {
+                        int x = act.x + I[i];
+                        int y = act.y + J[i];
+                        if(x >= 0 and x < N and y >= 0 and y < N and act.depth +1 <= IN.max ) {
+                            word nw = {x, y, act.depth + 1, act.value*10 + IN.T[x][y]};
+                            Q.push(nw);
+                        }
+                    }
+                }
+            }
+
+            clock_t endBFS = clock();
+            tBusqueda = (endBFS - startBFS)/double(CLOCKS_PER_SEC)*1000;
+        }
+
+
 /*
         void construirHash(const vector< vector<int> > &T, const int &minDepth, const int &maxDepth) {
             for (int i = 0; i < 10; ++i) {
@@ -319,7 +370,7 @@ class Tools {
             sl.close();
         }
 
-        void partidaPrimerCriterio(input &IN, hashTable &HT, const int &hf) {
+        void partidaPrimerCriterioBFS1(input &IN, hashTable &HT, const int &hf) {
             clock_t startPartida = clock();
             start = clock();
             cout << "BORRARDOS:" << endl;
@@ -341,7 +392,6 @@ class Tools {
             clock_t endPartida = clock();
             tTotal = (endPartida - startPartida)/double(CLOCKS_PER_SEC)*1000;
         }
-
         void partidaSegundoCriterio(input &IN, hashTable &HT, const int &hf) {
             clock_t startPartida = clock();
             start = clock();
@@ -365,7 +415,7 @@ class Tools {
             tTotal = (endPartida - startPartida)/double(CLOCKS_PER_SEC)*1000;
         }
 
-        void partidaPrimerCriterio2(input &IN, rollingHash &RH, hashTable& HT, const int &hf) {
+        void partidaPrimerCriterioBFS2(input &IN, rollingHash &RH, hashTable& HT, const int &hf) {
             cout << "nononoo" << endl;
             start = clock();
             clock_t startPartida = clock();
@@ -385,6 +435,55 @@ class Tools {
                     }
                     word w = {i, j, 1, IN.T[i][j]};
                     BFS2(IN, w, RH, HT, hf);
+                }
+            }
+            clock_t endPartida = clock();
+            tTotal = (endPartida - startPartida)/double(CLOCKS_PER_SEC)*1000;
+        }
+
+        void partidaPrimerCriterioDFS1(input &IN, hashTable &HT, const int &hf) {
+            clock_t startPartida = clock();
+            start = clock();
+            cout << "BORRARDOS:" << endl;
+            int N = IN.T.size();
+            IN.min = numDigits(IN.min);
+            IN.max = numDigits(IN.max);
+            double timeO = (clock()-start)/(double)(CLOCKS_PER_SEC)*1000;
+            for (int i = 0; i < N; ++i) {
+                for (int j = 0; j < N; ++j) {
+                    if( timeO >= tOut ) {
+                        cout << "TIME LIMIT "<<endl;
+                        return;
+                    }
+                    word w = {i, j, 1, IN.T[i][j]};
+                    DFS(IN, w, HT, hf);
+                }
+                timeO = (clock()-start)/(double)(CLOCKS_PER_SEC)*1000;
+            }
+            clock_t endPartida = clock();
+            tTotal = (endPartida - startPartida)/double(CLOCKS_PER_SEC)*1000;
+        }
+
+        void partidaPrimerCriterioDFS2(input &IN, rollingHash &RH, hashTable& HT, const int &hf) {
+            cout << "nononoo" << endl;
+            start = clock();
+            clock_t startPartida = clock();
+            int N = IN.T.size();
+            IN.min = numDigits(IN.min);
+            IN.max = numDigits(IN.max);
+            double timeO = (clock()-start)/(double)(CLOCKS_PER_SEC)*1000;
+            for (int i = 0; i < N; ++i) {
+                for (int j = 0; j < N ; ++j) {
+               /*     if ( tOut <= (clock()-startPartida)/double(CLOCKS_PER_SEC)*1000 ) {
+                        i = N;
+                        j = N;
+                    }*/
+                    if( timeO >= tOut ) {
+                        cout << "TIME LIMIT "<<endl;
+                        return;
+                    }
+                    word w = {i, j, 1, IN.T[i][j]};
+                    DFS2(IN, w, RH, HT, hf);
                 }
             }
             clock_t endPartida = clock();
