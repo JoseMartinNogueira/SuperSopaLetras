@@ -65,11 +65,12 @@ class Tools {
                 word act = Q.front();
                 Q.pop();
                 ////////////////////////////
-                cout << "(" << act.x << "," << act.y << ") " << act.value;
+                //cout << "(" << act.x << "," << act.y << ") " << act.value;
 
                 if((act.depth >= IN.min) and (HT.contains(act.value, hf))) {
                     ++IN.contador;
                     cout << act.value << endl;
+                    HT.deleteH(act.value, hf);
                 }
 
                 ////////////////////////////
@@ -271,7 +272,7 @@ class Tools {
 
         void partidaPrimerCriterio(input &IN, hashTable &HT, const int &hf) {
             clock_t startPartida = clock();
-            cout << "nononoo" << endl;
+            cout << "BORRARDOS:" << endl;
             int N = IN.T.size();
             IN.min = numDigits(IN.min);
             IN.max = numDigits(IN.max);
@@ -286,7 +287,7 @@ class Tools {
         }
 
         void partidaPrimerCriterio2(input &IN, rollingHash &RH, hashTable& HT, const int &hf) {
-            cout << "nononoo" << endl;
+            cout << "BORRARDOS:" << endl;
             clock_t startPartida = clock();
             int N = IN.T.size();
             IN.min = numDigits(IN.min);
