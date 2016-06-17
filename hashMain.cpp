@@ -27,6 +27,8 @@ int main(int argc, char *argv[]) {
 
 	/*__________________INFORMACION PROBLEMA_____________________*/
 	int alg;
+	cout << "1) Hash de diccionario" <<endl;
+	cout << "2) Hash de la tabla" <<endl;
 	cin >> alg;
 	if( alg == 1 ) {
 		Tools H;
@@ -103,7 +105,6 @@ int main(int argc, char *argv[]) {
 			cout << endl;
 		}
 
-
 		cout << P.min << " " << P.max << " " << P.porcentaje << endl;
 		cout << "---------------------------" << endl;
 		for (auto i : P.D) cout << " " << i;
@@ -115,9 +116,15 @@ int main(int argc, char *argv[]) {
 		}
 		cout << "---------------------------" << endl;
 		H.setTime(0.1);
-		H.partidaPrimerCriterio(P, HT, numFHash);
+		H.partidaSegundoCriterio(P, HT, numFHash);
 
-		cout << endl << "---------------:  "<< P.contador << endl;
+		int contadorpal = 0;
+
+		for( auto a : P.D ) {
+			if( HT.contains( a, numFHash ) ) ++contadorpal; 
+		}
+
+		cout << endl << "---------------:  "<< contadorpal << endl;
 
 		cout << "comp: " << HT.getComparacionesH() << endl;
 

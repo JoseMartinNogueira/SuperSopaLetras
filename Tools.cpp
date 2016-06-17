@@ -104,10 +104,21 @@ class Tools {
                 //cout << "(" << act.x << "," << act.y << ") " << act.value;
 
                 if( act.depth >= IN.min ) {
-                    cout << act.value << endl;
-                    ( HT.getHashTable() )[HF.hashFunction( act.value, HT.getHashTable().size(), hf )].push_back(act.value);
-                }
+                    cout << endl << act.value << endl;
+                    
+                    for( auto a : HT.getHashTable() ) {
+                        for( auto b : a ) {
+                            cout << "    " << b;
+                        }
+                        cout << endl;
+                    }
 
+                    ( HT.getHashTable() )[HF.hashFunction( act.value, HT.getHashTable().size(), hf )].push_back(act.value);
+                    
+
+                    cout << "FUNCO" <<endl;
+                }
+                cout << " + ";
                 ////////////////////////////
                 for (int i = 0; i < 8; ++i) {
                     int x = act.x + I[i];
@@ -331,7 +342,7 @@ class Tools {
             tTotal = (endPartida - startPartida)/double(CLOCKS_PER_SEC)*1000;
         }
 
-        void partidaPrimerCriterio(input &IN, hashTable &HT, const int &hf) {
+        void partidaSegundoCriterio(input &IN, hashTable &HT, const int &hf) {
             clock_t startPartida = clock();
             start = clock();
             cout << "BORRARDOS:" << endl;
