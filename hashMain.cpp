@@ -105,11 +105,6 @@ int main(int argc, char *argv[]) {
 			cout << endl;
 		}
 
-		cout << P.min << " " << P.max << " " << P.porcentaje << endl;
-		cout << "---------------------------" << endl;
-		for (auto i : P.D) cout << " " << i;
-		cout << endl;
-<<<<<<< HEAD
 		cout << "---------------------------" << endl;
 		for (auto i : P.T) {
 			for(auto j : i) cout << " " << j;
@@ -118,12 +113,6 @@ int main(int argc, char *argv[]) {
 		cout << "---------------------------" << endl;
 		H.setTime(0.1);
 		H.partidaSegundoCriterio(P, HT, numFHash);
-=======
-	}
-	cout << "---------------------------" << endl;
-	H.setTime(0.1);
-	H.partidaPrimerCriterioDFS1(P, HT, numFHash);
->>>>>>> d2cb01d61e159a7fcb10067e9f67ca016529a16e
 
 		int contadorpal = 0;
 
@@ -149,5 +138,59 @@ int main(int argc, char *argv[]) {
 			}
 			cout << endl;
 		}
+	}
+	else if( alg == 3) {
+		Tools H;
+		input P;
+		P.contador = 0;
+		H.leerDiccionario("d", P);
+		hashTable HT;
+
+		coutHashes();
+		int numFHash;
+
+		cin >> numFHash;
+
+		HT.createHashTable(P.D, numFHash);
+		for( auto a : HT.getHashTable() ) {
+			for( auto b : a ) {
+				cout << "    " << b;
+			}
+			cout << endl;
+		}
+
+		H.leerTablero("t", P);
+
+		cout << P.min << " " << P.max << " " << P.porcentaje << endl;
+		cout << "---------------------------" << endl;
+		for (auto i : P.D) cout << " " << i;
+		cout << endl;
+		cout << "---------------------------" << endl;
+		for (auto i : P.T) {
+			for(auto j : i) cout << " " << j;
+			cout << endl;
+		}
+		cout << "---------------------------" << endl;
+		H.setTime(0.1);
+		H.partidaPrimerCriterio(P, HT, numFHash);
+
+		cout << endl << "---------------:  "<< P.contador << endl;
+
+		cout << "comp: " << HT.getComparacionesH() << endl;
+
+		cout << "tiempo Construccion: " << HT.getTConstruccionH() << endl;
+
+		cout << "tiempo BFS: " << H.getTBusqueda() << endl;
+
+		cout << "tiempo total: " << H.getTTotal() << endl;
+
+
+		cout << "------------RESTANTES---------------" << endl;
+		for( auto a : HT.getHashTable() ) {
+			for( auto b : a ) {
+				cout << "    " << b ;
+			}
+			cout << endl;
+		}	
 	}
 }
