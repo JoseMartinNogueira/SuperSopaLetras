@@ -193,6 +193,7 @@ cout << "tiempo Construccion: " << RH.getTConstruccionRH() << endl;
 cout << "tiempo BFS: " << H.getTBusqueda() << endl;
 
 cout << "tiempo total: " << H.getTTotal() << endl;
+
 for( auto a : RH.getRollingHash() ) {
 	for( auto b : a ) {
 		cout << "    " << b.first << "::" << b.second;
