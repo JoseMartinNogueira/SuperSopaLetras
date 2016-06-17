@@ -130,7 +130,9 @@ class Tools {
             queue<word> Q;
             Q.push(w);
 
-            while (not Q.empty() and !timeOut()) {
+            double timeO = (clock()-start)/(double)(CLOCKS_PER_SEC)*1000;
+
+            while (not Q.empty() && tOut > timeO ) {
                 word act = Q.front();
                 Q.pop();
                 ////////////////////////////
@@ -359,12 +361,17 @@ class Tools {
             int N = IN.T.size();
             IN.min = numDigits(IN.min);
             IN.max = numDigits(IN.max);
+            double timeO = (clock()-start)/(double)(CLOCKS_PER_SEC)*1000;
             for (int i = 0; i < N; ++i) {
                 for (int j = 0; j < N ; ++j) {
                /*     if ( tOut <= (clock()-startPartida)/double(CLOCKS_PER_SEC)*1000 ) {
-                        i = N; 
+                        i = N;
                         j = N;
                     }*/
+                    if( timeO >= tOut ) {
+                        cout << "TIME LIMIT "<<endl;
+                        return;
+                    }
                     word w = {i, j, 1, IN.T[i][j]};
                     BFS2(IN, w, RH, HT, hf);
                 }

@@ -1,14 +1,18 @@
 #include <iostream>
-
+#include <list>
+#include <vector>
+#include <math.h>       /* pow */
 using namespace std;
 
 
 class hashFunctions {
 
 	public:
-		hashFunctions() {}
+		hashFunctions() {
+			
+		}
 
-		int hashFunction( const int i, const int numHashFunction, const int sizeHash ) const
+		int hashFunction( int i, const int numHashFunction, const int sizeHash ) 
 		{
 			switch( numHashFunction ) {
 				case 1:
@@ -23,28 +27,20 @@ class hashFunctions {
 				case 4:
 					return Jenkins( i );
 					break;
-				/*case 5:
-					int posicion = modulHF( i, sizeHash );
-					return linearProbing ( posicion, i );
-					break;
 				case 6:
 					return knuth( i );
 					break;
-				case 7:
-					return cuckooHashing ( i, sizeHash );
-					break;
 				default:
-					break;*/
+					break;
 			}
 		}
-
 
 		int modulHF( const int i, const int hashSize ) const
 		{
 			return i%hashSize;
 		}
 
-		int djb2( const int i ) const
+		unsigned int djb2( const int i )
 		{
 		    int hash = 5381;
 		    for (int c = i; c > 0; --c) {
@@ -53,7 +49,7 @@ class hashFunctions {
 		    return hash;
 		}
 
-		int sdbm( const int i ) const
+		unsigned int sdbm( const int i )
 		{
 			int hash = 0;
 			for (int c = i; c > 0; --c){
@@ -62,71 +58,20 @@ class hashFunctions {
 			return hash;
 		}
 
-		int Jenkins ( const int i ) const
-		{
-			/*
-		   i = (i+0x7ed55d16) + (i<<12);
-		   i = (i^0xc761c23c) ^ (i>>19);
-		   i = (i+0x165667b1) + (i<<5);
-		   i = (i+0xd3i2646c) ^ (i<<9);
-		   i = (i+0xfd7046c5) + (i<<3);
-		   i = (i^0xb55i4f09) ^ (i>>16);
-		   return a;
-		   */
-		}
-		/*
-		int linearProbing ( const int posicion, const int i ) const
-		{
-			//mientras no esté vacio y el elemento donde estamos sea distinto al que tenemos,
-			// seguiremos recorriendo. Lo que veo es que nos puede pasar que si la hash está llena,
-			// vaya constantemente dando vueltas?
-			Table ht = getHashTable();
-			while ( not ht.empty(posicion) && ht[posicion] != i ) ++posicion;
-			return posicion;
-		}
-		*/
-		int knuth ( const int ) const
-		{
-			//return i*2654435761%(2<<32);
+		unsigned int Jenkins( unsigned int i) {
+		    i = (i+0x7ed55d16) + (i<<12);
+		    i = (i^0xc761c23c) ^ (i>>19);
+		    i = (i+0x165667b1) + (i<<5);
+		    i = (i+0xd3a2646c) ^ (i<<9);
+		    i = (i+0xfd7046c5) + (i<<3);
+		    i = (i^0xb55a4f09) ^ (i>>16);
+		    return i;
 		}
 
-		/*
-		void cuckooHashing ( const int i, const int sizeHash ) const
+		unsigned long long knuth( int i  )
 		{
-
-			hashTable ht1 = getHashTable();
-			hashTable ht2 = getHashTable();
-
-			vector<int> A1; //Accesos hechos a H1, en este vector guardaremos la posición
-			vector<int> A2; //Accesos hechos a H2, en este vector guardaremos la posición
-
-			bool finished = false;
-			bool cycle = false;
-
-			while (not cycle || not finished) {
-				int posH1 = cuckooF1 ( i, sizeHash );
-				//Si está vacío, perfecto. Insertamos y ya está
-				if ( ht1.empty(posH1) ) {
-					ht1.insert(i);
-					finished = true;
-				}
-
-				else {
-					//Calcular el valor de la posición de H1 que quitamos en H2
-					int posH2 = cuckooF2 ( ht1.value(posH1), sizeHash );
-					checkIfCycle(A2);
-					//Insertamos el valor de la HT1 en la HT2 y la HT2 está desocupada
-					if ( ht2.empty(posH2) ) {
-						ht2.insert(i);
-						finished = true;
-					}
-					//Insertamos el valor de la HT1 en la HT2 pero la HT2 está ocupada
-					else {
-						posH1 = cuckooF1 ( ht2.value(posH2), sizeHash );
-						checkIfCycle(A1);
-					}
-				}
-			}
+		return fmod(i*2654435761,(pow(2,32)));
 		}
-		*/
+
+
 };
