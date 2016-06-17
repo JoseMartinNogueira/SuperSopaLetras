@@ -63,7 +63,7 @@ class Tools {
                 word act = Q.front();
                 Q.pop();
                 ////////////////////////////
-                //cout << "(" << act.x << "," << act.y << ") " << act.value;
+                cout << "(" << act.x << "," << act.y << ") " << act.value;
 
                 if((act.depth >= IN.min) and (HT.contains(act.value, hf))) {
                     ++IN.contador;
