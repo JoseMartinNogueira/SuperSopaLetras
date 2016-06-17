@@ -26,56 +26,114 @@ void coutHashes() {
 int main(int argc, char *argv[]) {
 
 	/*__________________INFORMACION PROBLEMA_____________________*/
-	Tools H;
-	input P;
-	P.contador = 0;
-	H.leerDiccionario("d", P);
-	hashTable HT;
+	int alg;
+	cin >> alg;
+	if( alg == 1 ) {
+		Tools H;
+		input P;
+		P.contador = 0;
+		H.leerDiccionario("d", P);
+		hashTable HT;
 
-	coutHashes();
-	int numFHash;
+		coutHashes();
+		int numFHash;
 
-	cin >> numFHash;
+		cin >> numFHash;
 
-	HT.createHashTable(P.D, numFHash);
-	for( auto a : HT.getHashTable() ) {
-		for( auto b : a ) {
-			cout << "    " << b;
+		HT.createHashTable(P.D, numFHash);
+		for( auto a : HT.getHashTable() ) {
+			for( auto b : a ) {
+				cout << "    " << b;
+			}
+			cout << endl;
 		}
+
+		H.leerTablero("t", P);
+
+		cout << P.min << " " << P.max << " " << P.porcentaje << endl;
+		cout << "---------------------------" << endl;
+		for (auto i : P.D) cout << " " << i;
 		cout << endl;
-	}
-
-	H.leerTablero("t", P);
-
-	cout << P.min << " " << P.max << " " << P.porcentaje << endl;
-	cout << "---------------------------" << endl;
-	for (auto i : P.D) cout << " " << i;
-	cout << endl;
-	cout << "---------------------------" << endl;
-	for (auto i : P.T) {
-		for(auto j : i) cout << " " << j;
-		cout << endl;
-	}
-	cout << "---------------------------" << endl;
-	H.setTime(0.1);
-	H.partidaPrimerCriterio(P, HT, numFHash);
-
-	cout << endl << "---------------:  "<< P.contador << endl;
-
-	cout << "comp: " << HT.getComparacionesH() << endl;
-
-	cout << "tiempo Construccion: " << HT.getTConstruccionH() << endl;
-
-	cout << "tiempo BFS: " << H.getTBusqueda() << endl;
-
-	cout << "tiempo total: " << H.getTTotal() << endl;
-
-
-	cout << "------------RESTANTES---------------" << endl;
-	for( auto a : HT.getHashTable() ) {
-		for( auto b : a ) {
-			cout << "    " << b ;
+		cout << "---------------------------" << endl;
+		for (auto i : P.T) {
+			for(auto j : i) cout << " " << j;
+			cout << endl;
 		}
+		cout << "---------------------------" << endl;
+		H.setTime(0.1);
+		H.partidaPrimerCriterio(P, HT, numFHash);
+
+		cout << endl << "---------------:  "<< P.contador << endl;
+
+		cout << "comp: " << HT.getComparacionesH() << endl;
+
+		cout << "tiempo Construccion: " << HT.getTConstruccionH() << endl;
+
+		cout << "tiempo BFS: " << H.getTBusqueda() << endl;
+
+		cout << "tiempo total: " << H.getTTotal() << endl;
+
+
+		cout << "------------RESTANTES---------------" << endl;
+		for( auto a : HT.getHashTable() ) {
+			for( auto b : a ) {
+				cout << "    " << b ;
+			}
+			cout << endl;
+		}
+	}
+	else if( alg == 2) {
+		Tools H;
+		input P;
+		P.contador = 0;
+		H.leerDiccionario("d", P);
+		hashTable HT;
+
+		coutHashes();
+		int numFHash;
+
+		cin >> numFHash;
+
+		H.leerTablero("t", P);
+		HT.createHashTable( P.T );
+		for( auto a : HT.getHashTable() ) {
+			for( auto b : a ) {
+				cout << "    " << b;
+			}
+			cout << endl;
+		}
+
+
+		cout << P.min << " " << P.max << " " << P.porcentaje << endl;
+		cout << "---------------------------" << endl;
+		for (auto i : P.D) cout << " " << i;
 		cout << endl;
+		cout << "---------------------------" << endl;
+		for (auto i : P.T) {
+			for(auto j : i) cout << " " << j;
+			cout << endl;
+		}
+		cout << "---------------------------" << endl;
+		H.setTime(0.1);
+		H.partidaPrimerCriterio(P, HT, numFHash);
+
+		cout << endl << "---------------:  "<< P.contador << endl;
+
+		cout << "comp: " << HT.getComparacionesH() << endl;
+
+		cout << "tiempo Construccion: " << HT.getTConstruccionH() << endl;
+
+		cout << "tiempo BFS: " << H.getTBusqueda() << endl;
+
+		cout << "tiempo total: " << H.getTTotal() << endl;
+
+
+		cout << "------------RESTANTES---------------" << endl;
+		for( auto a : HT.getHashTable() ) {
+			for( auto b : a ) {
+				cout << "    " << b ;
+			}
+			cout << endl;
+		}
 	}
 }

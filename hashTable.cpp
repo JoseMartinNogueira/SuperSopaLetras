@@ -38,15 +38,9 @@ class hashTable {
 			tConstruccionH = (endC - startC)/double(CLOCKS_PER_SEC)*1000;	
 		}
 
-		void createHashTable( matrix& sopaLetras,int numHashFunction )
+		void createHashTable( matrix& sopaLetras )
 		{
-			int n = sopaLetras.size();
-			for (int i = 0; i < n; ++i) {
-				for (int j = 0; j < n; ++i) {
-
-				}
-			}
-
+			int n = sopaLetras.size()*sopaLetras.size();
 		}
 
 		void deleteH( const int i, const int numHashFunction ) 
