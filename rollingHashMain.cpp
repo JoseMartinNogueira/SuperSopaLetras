@@ -70,7 +70,7 @@ int main(int argc, char *argv[]) {
 	cout << "---------------------------" << endl;
 
 	H.setTime(10.0);
-	H.partidaPrimerCriterio2(P, RH, HT, numFHash);
+	H.partidaPrimerCriterioDFS2(P, RH, HT, numFHash);
 
 	cout << endl << "---------------:  "<< P.contador << endl;
 

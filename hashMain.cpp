@@ -58,7 +58,7 @@ int main(int argc, char *argv[]) {
 	}
 	cout << "---------------------------" << endl;
 	H.setTime(0.1);
-	H.partidaPrimerCriterio(P, HT, numFHash);
+	H.partidaPrimerCriterioDFS1(P, HT, numFHash);
 
 	cout << endl << "---------------:  "<< P.contador << endl;
 
