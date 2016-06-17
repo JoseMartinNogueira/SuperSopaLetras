@@ -148,8 +148,25 @@ int main(int argc, char *argv[]) {
 */
 H.leerDiccionario("d", P);
 rollingHash RH;
+hashTable HT;
+
+HT.createHashTable( P.D, 1 );
+
+for( auto a : HT.getHashTable() ) {
+	for ( auto b : a) {
+		cout << "  " << b << endl;
+	}
+	cout << endl;
+}
+cout << "--------- " << HT.contains(438, 1)<<" ---------"<< endl;
 
 RH.createRollingHash(P.D, P.max, 1);
+for( auto a : RH.getRollingHash() ) {
+	for( auto b : a ) {
+		cout << "    " << b.first << "::" << b.second;
+	}
+	cout << endl;
+}
 
 H.leerTablero("t", P);
 
@@ -164,7 +181,7 @@ for (auto i : P.T) {
 }
 cout << "---------------------------" << endl;
 
-H.partidaPrimerCriterio2(P, RH, 1);
+H.partidaPrimerCriterio2(P, RH, HT, 1);
 
 cout << endl << "---------------:  "<< P.contador << endl;
 
@@ -175,10 +192,10 @@ cout << "tiempo Construccion: " << RH.getTConstruccionRH() << endl;
 cout << "tiempo BFS: " << H.getTBusqueda() << endl;
 
 cout << "tiempo total: " << H.getTTotal() << endl;
-
-for( auto a : RH.getROllingHash() )
+for( auto a : RH.getRollingHash() ) {
 	for( auto b : a ) {
-		cout << " " << b.first
+		cout << "    " << b.first << "::" << b.second;
 	}
 	cout << endl;
+}
 }

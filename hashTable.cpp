@@ -25,7 +25,7 @@ class hashTable {
 			return tConstruccionH;
 		}
 
-		void createHashTable(vector<int>& diccionario, int numHashFunction )
+		void createHashTable(const vector<int>& diccionario, int numHashFunction )
 		{
 			clock_t startC = clock();
 			int size = diccionario.size();
@@ -47,6 +47,22 @@ class hashTable {
 				}
 			}
 
+		}
+
+		void deleteH( const int i, const int numHashFunction ) 
+		{
+			hashFunctions HF;
+			int index = HF.hashFunction( i, numHashFunction, hashT.size() );
+			list<int> auxList = hashT[index];
+			list<int>::iterator it;
+			for( it = auxList.begin(); it != auxList.end(); ++it ) {
+				++comparacionesH;
+				if( *it == i ) {
+					it = auxList.erase(it);
+					hashT[index] = auxList;
+					break;
+				}
+			}
 		}
 
 		void insert( const int i, const int value )

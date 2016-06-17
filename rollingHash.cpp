@@ -44,7 +44,8 @@ public:
         rollH = rollHash( diccionario.size() * numDigits2(maxSize));
         hashFunctions HF;
         for( auto a : diccionario ) {
-            int aux = 10;
+            int sizeAux = numDigits2( a );
+            int aux = pow(10, sizeAux-1);
             int prefijo = a;
             int index = HF.hashFunction( prefijo, numHashFunction, rollH.size() );
             bool auxb = containsRH( prefijo, numHashFunction, 2 );
@@ -52,10 +53,9 @@ public:
                 pair<int,int> p (prefijo, 1);
                 rollH[index].push_back( p );
             } 
-            int sizeAux = numDigits2( a );
-            for( int i = sizeAux; prefijo > 0; --i ) {
-                prefijo = prefijo / aux;
-                aux = aux*10;
+            for( int i = 0; i < sizeAux-1; ++i ) {
+                prefijo = a / aux;
+                aux = aux/10;
                 auxb = containsRH( prefijo, numHashFunction, 2);
                 if( !auxb ) {
                     pair<int,int> p (prefijo, 1);
@@ -66,22 +66,42 @@ public:
         clock_t endC = clock();
         tConstruccionRH = (endC - startC)/double(CLOCKS_PER_SEC)*1000;
     }
+
+    void deletePrefix( const int a, const int numHashFunction ) {
+            hashFunctions HF;
+            int sizeAux = numDigits2( a );
+            int aux = pow(10, sizeAux-1);
+            int prefijo = a;
+            int index = HF.hashFunction( prefijo, numHashFunction, rollH.size() );
+            containsRH( prefijo, numHashFunction, 3 );
+             
+            for( int i = 0; i < sizeAux-1; ++i ) {
+                prefijo = a / aux;
+                aux = aux/10;
+                containsRH( prefijo, numHashFunction, 3);
+            }
+    }
     /// retorna la pos en al hash si es = 0 es que no esta
     // modo == 1 consulta, modo == 2 inc, modo == 3 dec
     bool containsRH( const int i, const int numHashFunction, int modo )
     {
         hashFunctions HF;
-        list<pair<int,int> > auxList = rollH[HF.hashFunction( i, numHashFunction, rollH.size() )];
+        int index = HF.hashFunction( i, numHashFunction, rollH.size() );
+        list<pair<int,int> > auxList = rollH[index];
         list<pair<int,int> >::iterator it;
         for( it = auxList.begin(); it != auxList.end(); ++it ) {
             comparacionesRH++;
             if( (*it).first == i ) {
-                if( modo == 2 ) (*it).second++;
+                if( modo == 2 ) {
+                    (*it).second++;
+                    rollH[index] = auxList;
+                }
                 else if( modo == 3) {
                     if ((*it).second > 1) (*it).second--;
                     else {
                         it = auxList.erase(it);
                     }
+                    rollH[index] = auxList;
                 }
                 return true;
             }
