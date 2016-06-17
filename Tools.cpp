@@ -287,13 +287,17 @@ class Tools {
 
         void partidaPrimerCriterio2(input &IN, rollingHash &RH, hashTable& HT, const int &hf) {
             cout << "nononoo" << endl;
+            start = clock();
             clock_t startPartida = clock();
             int N = IN.T.size();
             IN.min = numDigits(IN.min);
             IN.max = numDigits(IN.max);
             for (int i = 0; i < N; ++i) {
                 for (int j = 0; j < N ; ++j) {
-                    if (timeOut()) {i = N; j = N;}
+                    if ( tOut <= (clock()-startPartida)/double(CLOCKS_PER_SEC)*1000 ) {
+                        i = N; 
+                        j = N;
+                    }
                     word w = {i, j, 1, IN.T[i][j]};
                     BFS2(IN, w, RH, HT, hf);
                 }
