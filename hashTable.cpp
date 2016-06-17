@@ -25,6 +25,11 @@ class hashTable {
 			return tConstruccionH;
 		}
 
+		int getSize() const
+		{
+			return hashT.size();
+		}
+
 		void createHashTable(const vector<int>& diccionario, int numHashFunction )
 		{
 			clock_t startC = clock();
@@ -40,7 +45,7 @@ class hashTable {
 
 		void createHashTable( matrix& sopaLetras )
 		{
-			int n = sopaLetras.size()*sopaLetras.size();
+			hashT = Table(sopaLetras.size()*sopaLetras.size());
 		}
 
 		void deleteH( const int i, const int numHashFunction ) 
@@ -67,7 +72,7 @@ class hashTable {
 		bool contains( const int x, const int hf )
 		{
 			hashFunctions HF;
-			for( auto& a : hashT[HF.hashFunction( x, hf, hashT.size() )] ) {
+			for( auto a : hashT[HF.hashFunction( x, hf, hashT.size() )] ) {
 				++comparacionesH;
 				if ( a == x ) return true;
 			}
@@ -92,6 +97,7 @@ class hashTable {
 
 		bool pertany( int i, int posicion){
 			for (auto a : hashT[posicion]){
+				++comparacionesH;
 				if (i == a ) return true;
 
 			}

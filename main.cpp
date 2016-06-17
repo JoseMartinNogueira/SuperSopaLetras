@@ -29,13 +29,11 @@ void executeAlgorithm( const int i ) const
 */
 void coutHashes() {
 	cout << "Selecciona una de los siguientes funciones de hash(indicando el numero):" << endl;
-	cout << "(1)" << endl;
-	cout << "(2)" << endl;
-	cout << "(3)" << endl;
-	cout << "(4)" << endl;
-	cout << "(5)" << endl;
-	cout << "(6)" << endl;
-	cout << "(7)" << endl;
+	cout << "(1) Modulo" << endl;
+	cout << "(2) DJB2" << endl;
+	cout << "(3) SDBM" << endl;
+	cout << "(4) JENKINS" << endl;
+	cout << "(5) KNUTH" << endl;
 }
 
 

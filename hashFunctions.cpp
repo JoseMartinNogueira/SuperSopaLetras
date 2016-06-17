@@ -19,16 +19,16 @@ class hashFunctions {
 					return modulHF( i, sizeHash );
 					break;
 				case 2:
-					return djb2( i );
+					return djb2( i  )%sizeHash;
 					break;
 				case 3:
-					return sdbm( i );
+					return sdbm( i )%sizeHash;
 					break;
 				case 4:
-					return Jenkins( i );
+					return Jenkins( i )%sizeHash;
 					break;
 				case 6:
-					return knuth( i );
+					return (int)(knuth( i  , sizeHash));
 					break;
 				default:
 					break;
@@ -49,7 +49,7 @@ class hashFunctions {
 		    return hash;
 		}
 
-		unsigned int sdbm( const int i )
+		unsigned int sdbm( const int i  )
 		{
 			int hash = 0;
 			for (int c = i; c > 0; --c){
@@ -58,7 +58,7 @@ class hashFunctions {
 			return hash;
 		}
 
-		unsigned int Jenkins( unsigned int i) {
+		unsigned int Jenkins( unsigned int i ) {
 		    i = (i+0x7ed55d16) + (i<<12);
 		    i = (i^0xc761c23c) ^ (i>>19);
 		    i = (i+0x165667b1) + (i<<5);
@@ -68,9 +68,9 @@ class hashFunctions {
 		    return i;
 		}
 
-		unsigned long long knuth( int i  )
+		unsigned long long knuth( int i , int sizeHash  )
 		{
-		return fmod(i*2654435761,(pow(2,32)));
+		return fmod(fmod(i*2654435761,(pow(2,32))),sizeHash);
 		}
 
 

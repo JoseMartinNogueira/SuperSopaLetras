@@ -100,25 +100,12 @@ class Tools {
             while (not Q.empty() && tOut > timeO ) {
                 word act = Q.front();
                 Q.pop();
-                ////////////////////////////
-                //cout << "(" << act.x << "," << act.y << ") " << act.value;
 
-                if( act.depth >= IN.min ) {
-                    cout << endl << act.value << endl;
-                    
-                    for( auto a : HT.getHashTable() ) {
-                        for( auto b : a ) {
-                            cout << "    " << b;
-                        }
-                        cout << endl;
-                    }
-
-                    ( HT.getHashTable() )[HF.hashFunction( act.value, HT.getHashTable().size(), hf )].push_back(act.value);
-                    
-
-                    cout << "FUNCO" <<endl;
+                if(act.depth >= IN.min) {
+                    cout << act.value << endl;
+                    HT.insert(HF.hashFunction( act.value, hf, HT.getSize()), act.value);
                 }
-                cout << " + ";
+
                 ////////////////////////////
                 for (int i = 0; i < 8; ++i) {
                     int x = act.x + I[i];
@@ -188,6 +175,39 @@ class Tools {
                     ++IN.contador;
                     cout << act.value << endl;
                     HT.deleteH(act.value, hf);
+                }
+
+                ////////////////////////////
+                for (int i = 0; i < 8; ++i) {
+                    int x = act.x + I[i];
+                    int y = act.y + J[i];
+                    if(x >= 0 and x < N and y >= 0 and y < N and act.depth +1 <= IN.max ) {
+                        word nw = {x, y, act.depth + 1, act.value*10 + IN.T[x][y]};
+                        Q.push(nw);
+                    }
+                }
+                timeO = (clock()-start)/(double)(CLOCKS_PER_SEC)*1000;
+            }
+            clock_t endBFS = clock();
+            tBusqueda = (endBFS - startBFS)/double(CLOCKS_PER_SEC)*1000;
+        }
+
+        void DFSTablero(input &IN, word &w, hashTable &HT, const int &hf) {
+            clock_t startBFS = clock();
+            hashFunctions HF;
+            int  N = IN.T.size();
+            stack<word> Q;
+            Q.push(w);
+            double timeO = (clock()-start)/(double)(CLOCKS_PER_SEC)*1000;
+            //cout << " min: " << IN.min << ", max: " << IN.max << endl;
+            while (not Q.empty() && tOut > timeO ) {
+                word act = Q.top();
+                Q.pop();
+                ////////////////////////////
+                //cout << "(" << act.x << "," << act.y << ") " << act.value;
+
+                if(act.depth >= IN.min) {
+                    HT.insert(HF.hashFunction( act.value, hf, HT.getSize()), act.value);
                 }
 
                 ////////////////////////////
@@ -381,7 +401,6 @@ class Tools {
             for (int i = 0; i < N; ++i) {
                 for (int j = 0; j < N; ++j) {
                     if( timeO >= tOut ) {
-                        cout << "TIME LIMIT "<<endl;
                         return;
                     }
                     word w = {i, j, 1, IN.T[i][j]};
@@ -392,10 +411,10 @@ class Tools {
             clock_t endPartida = clock();
             tTotal = (endPartida - startPartida)/double(CLOCKS_PER_SEC)*1000;
         }
-        void partidaSegundoCriterio(input &IN, hashTable &HT, const int &hf) {
+
+        void partidaSegundoCriterioBFS1(input &IN, hashTable &HT, const int &hf) {
             clock_t startPartida = clock();
             start = clock();
-            cout << "BORRARDOS:" << endl;
             int N = IN.T.size();
             IN.min = numDigits(IN.min);
             IN.max = numDigits(IN.max);
@@ -425,11 +444,7 @@ class Tools {
             double timeO = (clock()-start)/(double)(CLOCKS_PER_SEC)*1000;
             for (int i = 0; i < N; ++i) {
                 for (int j = 0; j < N ; ++j) {
-               /*     if ( tOut <= (clock()-startPartida)/double(CLOCKS_PER_SEC)*1000 ) {
-                        i = N;
-                        j = N;
-                    }*/
-                    if( timeO >= tOut ) {
+                     if( timeO >= tOut ) {
                         cout << "TIME LIMIT "<<endl;
                         return;
                     }
@@ -457,6 +472,28 @@ class Tools {
                     }
                     word w = {i, j, 1, IN.T[i][j]};
                     DFS(IN, w, HT, hf);
+                }
+                timeO = (clock()-start)/(double)(CLOCKS_PER_SEC)*1000;
+            }
+            clock_t endPartida = clock();
+            tTotal = (endPartida - startPartida)/double(CLOCKS_PER_SEC)*1000;
+        }
+
+        void partidaSegundoCriterioDFS1(input &IN, hashTable &HT, const int &hf) {
+            clock_t startPartida = clock();
+            start = clock();
+            int N = IN.T.size();
+            IN.min = numDigits(IN.min);
+            IN.max = numDigits(IN.max);
+            double timeO = (clock()-start)/(double)(CLOCKS_PER_SEC)*1000;
+            for (int i = 0; i < N; ++i) {
+                for (int j = 0; j < N; ++j) {
+                    if( timeO >= tOut ) {
+                        cout << "TIME LIMIT "<<endl;
+                        return;
+                    }
+                    word w = {i, j, 1, IN.T[i][j]};
+                    DFSTablero(IN, w, HT, hf);
                 }
                 timeO = (clock()-start)/(double)(CLOCKS_PER_SEC)*1000;
             }
