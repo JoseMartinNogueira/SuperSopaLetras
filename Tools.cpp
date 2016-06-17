@@ -76,7 +76,7 @@ class Tools {
                 for (int i = 0; i < 8; ++i) {
                     int x = act.x + I[i];
                     int y = act.y + J[i];
-                    if(x >= 0 and x < N and y >= 0 and y < N and act.depth +1 < IN.max ) {
+                    if(x >= 0 and x < N and y >= 0 and y < N and act.depth +1 <= IN.max ) {
                         word nw = {x, y, act.depth + 1, act.value*10 + IN.T[x][y]};
                         Q.push(nw);
                     }

@@ -70,6 +70,8 @@ int main(int argc, char *argv[]) {
 
 	cout << "tiempo total: " << H.getTTotal() << endl;
 
+
+	cout << "------------RESTANTES---------------" << endl;
 	for( auto a : HT.getHashTable() ) {
 		for( auto b : a ) {
 			cout << "    " << b ;
