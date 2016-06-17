@@ -36,6 +36,8 @@ class Tools {
         int *J;
         double tTotal;
         double tBusqueda;
+        time_t start;
+        double tOut;
 
 	public:
         Tools() {
@@ -90,7 +92,8 @@ class Tools {
             bool aux;
             queue<word> Q;
             Q.push(w);
-            while (not Q.empty()) {
+
+            while (not Q.empty() and !timeOut()) {
                 word act = Q.front();
                 Q.pop();
                 ////////////////////////////
@@ -113,6 +116,7 @@ class Tools {
                     }
                 }
             }
+
             clock_t endBFS = clock();
             tBusqueda = (endBFS - startBFS)/double(CLOCKS_PER_SEC)*1000;
         }
@@ -288,13 +292,25 @@ class Tools {
             IN.min = numDigits(IN.min);
             IN.max = numDigits(IN.max);
             for (int i = 0; i < N; ++i) {
-                for (int j = 0; j < N; ++j) {
+                for (int j = 0; j < N ; ++j) {
+                    if (timeOut()) {i = N; j = N;}
                     word w = {i, j, 1, IN.T[i][j]};
                     BFS2(IN, w, RH, HT, hf);
                 }
             }
             clock_t endPartida = clock();
             tTotal = (endPartida - startPartida)/double(CLOCKS_PER_SEC)*1000;
+        }
+
+        void setTime(double d) {
+            start = time(0);
+            tOut = d;
+        }
+
+        bool timeOut() {
+            //while (1) cout << "timepo: " << !(difftime(time(0), start) < tOut) << endl;
+            return difftime(time(0), start) > tOut;
+
         }
 
 };
