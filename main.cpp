@@ -181,6 +181,7 @@ for (auto i : P.T) {
 }
 cout << "---------------------------" << endl;
 
+H.setTime(1.0);
 H.partidaPrimerCriterio2(P, RH, HT, 1);
 
 cout << endl << "---------------:  "<< P.contador << endl;
