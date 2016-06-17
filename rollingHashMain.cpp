@@ -35,28 +35,29 @@ int main(int argc, char *argv[]) {
 		Tools H;
 		input P;
 		P.contador = 0;
-		H.leerDiccionario("d", P);
-		rollingHash RH;
-		hashTable HT;
-
 		coutHashes();
 		int numFHash;
 
 		cin >> numFHash;
 
+		cout << "Introduce el archivo del diccionario: " << endl;
+		string d;
+		cin >> d;
+		H.leerDiccionario(d, P);
+		rollingHash RH;
+		hashTable HT;
+
+		
+
 		HT.createHashTable( P.D, numFHash);
 
-		for( auto a : HT.getHashTable() ) {
-			for ( auto b : a) {
-				cout << "  " << b << endl;
-			}
-			cout << endl;
-		}
-		cout << "--------- " << HT.contains(438, numFHash)<<" ---------"<< endl;
+		cout << "Introduce el archivo del tablero: " << endl;
+		string t;
+		cin >> t;
 
 		RH.createRollingHash(P.D, P.max, numFHash);
 
-		H.leerTablero("t", P);
+		H.leerTablero(t, P);
 
 		cout << P.min << " " << P.max << " " << P.porcentaje << endl;
 		cout << "---------------------------" << endl;
@@ -69,7 +70,7 @@ int main(int argc, char *argv[]) {
 		}
 		cout << "---------------------------" << endl;
 
-		H.setTime(10.0);
+		H.setTime(timelimit);
 		H.partidaPrimerCriterioBFS2(P, RH, HT, numFHash);
 
 		cout << endl << "---------------:  "<< P.contador << endl;
@@ -86,20 +87,28 @@ int main(int argc, char *argv[]) {
 		Tools H;
 		input P;
 		P.contador = 0;
-		H.leerDiccionario("d", P);
-		rollingHash RH;
-		hashTable HT;
-
 		coutHashes();
 		int numFHash;
 
 		cin >> numFHash;
+		cout << "Introduce el archivo del diccionario: " << endl;
+		string d;
+		cin >> d;
+		H.leerDiccionario(d, P);
+		rollingHash RH;
+		hashTable HT;
+
+		cout << "Introduce el archivo del tablero: " << endl;
+		string t;
+		cin >> t;
+
 
 		HT.createHashTable( P.D, numFHash);
 
 		RH.createRollingHash(P.D, P.max, numFHash);
 
-		H.leerTablero("t", P);
+
+		H.leerTablero(t, P);
 
 		cout << P.min << " " << P.max << " " << P.porcentaje << endl;
 		cout << "---------------------------" << endl;

@@ -38,23 +38,23 @@ int main(int argc, char *argv[]) {
 		Tools H;
 		input P;
 		P.contador = 0;
-		H.leerDiccionario("d", P);
-		hashTable HT;
-
 		coutHashes();
 		int numFHash;
 
 		cin >> numFHash;
+		cout << "Introduce el archivo del diccionario: " << endl;
+		string d;
+		cin >> d;
+		H.leerDiccionario( d, P );
+		hashTable HT;
 
-		HT.createHashTable(P.D, numFHash);
-		for( auto a : HT.getHashTable() ) {
-			for( auto b : a ) {
-				cout << "    " << b;
-			}
-			cout << endl;
-		}
+		
 
-		H.leerTablero("t", P);
+		cout << "Introduce el archivo del tablero: " << endl;
+		string t;
+		cin >> t;
+
+		H.leerTablero(t, P);
 
 		cout << P.min << " " << P.max << " " << P.porcentaje << endl;
 		cout << "---------------------------" << endl;
@@ -83,23 +83,21 @@ int main(int argc, char *argv[]) {
 		Tools H;
 		input P;
 		P.contador = 0;
-		H.leerDiccionario("d", P);
-		hashTable HT;
-
 		coutHashes();
 		int numFHash;
 
 		cin >> numFHash;
+		cout << "Introduce el archivo del diccionario: " << endl;
+		string d;
+		cin >> d;
+		H.leerDiccionario(d, P);
+		hashTable HT;
 
-		HT.createHashTable(P.D, numFHash);
-		for( auto a : HT.getHashTable() ) {
-			for( auto b : a ) {
-				cout << "    " << b;
-			}
-			cout << endl;
-		}
+		cout << "Introduce el archivo del tablero: " << endl;
+		string t;
+		cin >> t;
 
-		H.leerTablero("t", P);
+		H.leerTablero(t, P);
 
 		cout << P.min << " " << P.max << " " << P.porcentaje << endl;
 		cout << "---------------------------" << endl;
@@ -128,17 +126,22 @@ int main(int argc, char *argv[]) {
 		Tools H;
 		input P;
 		P.contador = 0;
-		H.leerDiccionario("d", P);
-		hashTable HT;
-
 		coutHashes();
 		int numFHash;
 
 		cin >> numFHash;
+		cout << "Introduce el archivo del diccionario: " << endl;
+		string d;
+		cin >> d;
+		H.leerDiccionario(d, P);
+		hashTable HT;
+		cout << "Introduce el archivo del tablero: " << endl;
+		string t;
+		cin >> t;
 
 		
 
-		H.leerTablero("t", P);
+		H.leerTablero(t, P);
 
 		HT.createHashTable(P.T);
 		
@@ -174,17 +177,21 @@ int main(int argc, char *argv[]) {
 		Tools H;
 		input P;
 		P.contador = 0;
-		H.leerDiccionario("d", P);
-		hashTable HT;
-
 		coutHashes();
 		int numFHash;
 
 		cin >> numFHash;
-
+		cout << "Introduce el archivo del diccionario: " << endl;
+		string d;
+		cin >> d;
+		H.leerDiccionario(d, P);
+		hashTable HT;
 		
-
-		H.leerTablero("t", P);
+		cout << "Introduce el archivo del tablero: " << endl;
+		string t;
+		cin >> t;
+		
+		H.leerTablero(t, P);
 
 		HT.createHashTable(P.T);
 		
