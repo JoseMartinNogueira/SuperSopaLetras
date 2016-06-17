@@ -31,6 +31,9 @@ int main(int argc, char *argv[]) {
 	cout << "3) Hash tablero 	 + BFS" << endl;
 	cout << "4) Hash tablero     + DFS" <<endl;
 	cin >> alg;
+	cout << " Introduce limite de tiempo en ms" << endl;
+	int timelimit;
+	cin >> timelimit;
 	if( alg == 1 ) {	
 		Tools H;
 		input P;
@@ -63,7 +66,7 @@ int main(int argc, char *argv[]) {
 			cout << endl;
 		}
 		cout << "---------------------------" << endl;
-		H.setTime(50);
+		H.setTime(timelimit);
 		H.partidaPrimerCriterioBFS1(P, HT, numFHash);
 
 		cout << endl << "---------encontradas:  "<< P.contador << endl;
@@ -108,7 +111,7 @@ int main(int argc, char *argv[]) {
 			cout << endl;
 		}
 		cout << "---------------------------" << endl;
-		H.setTime(50);
+		H.setTime(timelimit);
 		H.partidaPrimerCriterioDFS1(P, HT, numFHash);
 
 		cout << endl << "---------encontradas:  "<< P.contador << endl;
@@ -149,7 +152,7 @@ int main(int argc, char *argv[]) {
 			cout << endl;
 		}
 		cout << "---------------------------" << endl;
-		H.setTime(999999999999999999);
+		H.setTime(999999999999999999timelimit);
 		H.partidaSegundoCriterioBFS1(P, HT, numFHash);
 
 		int encontradas = 0;
@@ -195,7 +198,7 @@ int main(int argc, char *argv[]) {
 			cout << endl;
 		}
 		cout << "---------------------------" << endl;
-		H.setTime(999999999999999999);
+		H.setTime(timelimit);
 		H.partidaSegundoCriterioDFS1(P, HT, numFHash);
 
 		int encontradas = 0;

@@ -511,10 +511,7 @@ class Tools {
             double timeO = (clock()-start)/(double)(CLOCKS_PER_SEC)*1000;
             for (int i = 0; i < N; ++i) {
                 for (int j = 0; j < N ; ++j) {
-               /*     if ( tOut <= (clock()-startPartida)/double(CLOCKS_PER_SEC)*1000 ) {
-                        i = N;
-                        j = N;
-                    }*/
+                    
                     if( timeO >= tOut ) {
                         cout << "TIME LIMIT "<<endl;
                         return;

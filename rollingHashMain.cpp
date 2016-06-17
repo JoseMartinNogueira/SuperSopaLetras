@@ -23,66 +23,106 @@ void coutHashes() {
 
 int main(int argc, char *argv[]) {
 
-	/*__________________INFORMACION PROBLEMA_____________________*/
-	Tools H;
-	input P;
-	P.contador = 0;
-	H.leerDiccionario("d", P);
-	rollingHash RH;
-	hashTable HT;
+	int alg;
+	cout << "ELige un algoritmo:" <<endl;
+	cout << "1) Prefijo + BFS" << endl;
+	cout << "2) Prefijo + DFS" << endl;
+	cin >> alg;
+	cout << " Introduce limite de tiempo en ms" << endl;
+	int timelimit;
+	cin >> timelimit;
+	if( alg == 1 ) {
+		Tools H;
+		input P;
+		P.contador = 0;
+		H.leerDiccionario("d", P);
+		rollingHash RH;
+		hashTable HT;
 
-	coutHashes();
-	int numFHash;
+		coutHashes();
+		int numFHash;
 
-	cin >> numFHash;
+		cin >> numFHash;
 
-	HT.createHashTable( P.D, numFHash);
+		HT.createHashTable( P.D, numFHash);
 
-	for( auto a : HT.getHashTable() ) {
-		for ( auto b : a) {
-			cout << "  " << b << endl;
+		for( auto a : HT.getHashTable() ) {
+			for ( auto b : a) {
+				cout << "  " << b << endl;
+			}
+			cout << endl;
 		}
-		cout << endl;
-	}
-	cout << "--------- " << HT.contains(438, numFHash)<<" ---------"<< endl;
+		cout << "--------- " << HT.contains(438, numFHash)<<" ---------"<< endl;
 
-	RH.createRollingHash(P.D, P.max, numFHash);
-	for( auto a : RH.getRollingHash() ) {
-		for( auto b : a ) {
-			cout << "    " << b.first << "::" << b.second;
+		RH.createRollingHash(P.D, P.max, numFHash);
+
+		H.leerTablero("t", P);
+
+		cout << P.min << " " << P.max << " " << P.porcentaje << endl;
+		cout << "---------------------------" << endl;
+		for (auto i : P.D) cout << " " << i;
+		cout << endl;
+		cout << "---------------------------" << endl;
+		for (auto i : P.T) {
+			for(auto j : i) cout << " " << j;
+			cout << endl;
 		}
-		cout << endl;
+		cout << "---------------------------" << endl;
+
+		H.setTime(10.0);
+		H.partidaPrimerCriterioBFS2(P, RH, HT, numFHash);
+
+		cout << endl << "---------------:  "<< P.contador << endl;
+
+		cout << "comp: " << RH.getComparacionesRH() << endl;
+
+		cout << "tiempo Construccion: " << RH.getTConstruccionRH() << endl;
+
+		cout << "tiempo BFS: " << H.getTBusqueda() << endl;
+
+		cout << "tiempo total: " << H.getTTotal() << endl;
 	}
+	else if( alg == 2 ) {
+		Tools H;
+		input P;
+		P.contador = 0;
+		H.leerDiccionario("d", P);
+		rollingHash RH;
+		hashTable HT;
 
-	H.leerTablero("t", P);
+		coutHashes();
+		int numFHash;
 
-	cout << P.min << " " << P.max << " " << P.porcentaje << endl;
-	cout << "---------------------------" << endl;
-	for (auto i : P.D) cout << " " << i;
-	cout << endl;
-	cout << "---------------------------" << endl;
-	for (auto i : P.T) {
-		for(auto j : i) cout << " " << j;
+		cin >> numFHash;
+
+		HT.createHashTable( P.D, numFHash);
+
+		RH.createRollingHash(P.D, P.max, numFHash);
+
+		H.leerTablero("t", P);
+
+		cout << P.min << " " << P.max << " " << P.porcentaje << endl;
+		cout << "---------------------------" << endl;
+		for (auto i : P.D) cout << " " << i;
 		cout << endl;
-	}
-	cout << "---------------------------" << endl;
-
-	H.setTime(10.0);
-	H.partidaPrimerCriterioDFS2(P, RH, HT, numFHash);
-
-	cout << endl << "---------------:  "<< P.contador << endl;
-
-	cout << "comp: " << RH.getComparacionesRH() << endl;
-
-	cout << "tiempo Construccion: " << RH.getTConstruccionRH() << endl;
-
-	cout << "tiempo BFS: " << H.getTBusqueda() << endl;
-
-	cout << "tiempo total: " << H.getTTotal() << endl;
-	for( auto a : RH.getRollingHash() ) {
-		for( auto b : a ) {
-			cout << "    " << b.first << "::" << b.second;
+		cout << "---------------------------" << endl;
+		for (auto i : P.T) {
+			for(auto j : i) cout << " " << j;
+			cout << endl;
 		}
-		cout << endl;
+		cout << "---------------------------" << endl;
+
+		H.setTime(timelimit);
+		H.partidaPrimerCriterioDFS2(P, RH, HT, numFHash);
+
+		cout << endl << "---------------:  "<< P.contador << endl;
+
+		cout << "comp: " << RH.getComparacionesRH() << endl;
+
+		cout << "tiempo Construccion: " << RH.getTConstruccionRH() << endl;
+
+		cout << "tiempo BFS: " << H.getTBusqueda() << endl;
+
+		cout << "tiempo total: " << H.getTTotal() << endl;
 	}
 }
